@@ -1,0 +1,13 @@
+#landingPage, #questionPage, #instructionPage{
+    background-color: rgb(159, 159, 255);
+    margin: auto;
+  width: 80%;
+  padding: 10px;
+  border: 5px black solid;
+  height: 500px;
+}
+
+.instructions {
+    height: 350px;
+    overflow: scroll;
+}
