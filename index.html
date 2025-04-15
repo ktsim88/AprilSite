@@ -21,8 +21,10 @@
 
   <body>
     <main class="container text-center my-3 p-3">
+      <!-- this row is for everything before selecting character -->
       <div class="row justify-content-center align-items-center d-flex">
-        <!-- first page to pplay game -->
+        <p class="mt-5 d-sm-block d-md-none">Disclaimer: this game is ideal for larger screens.</p>
+        <!-- first page to play game -->
         <div id="landingPage" class="m-5 py-5 px-3">
           <h1>Race to the Crown</h1>
           <p>Online Version</p>
@@ -38,9 +40,10 @@
         <!-- a page will pop up asking user if its their first time playing -->
         <div id="questionPage" class="m-5 py-5 px-3">
             <h1 class="my-3">Is this your first time playing</h1>
-            <button type="button" class="btn btn-success px-5 my-2" onclick="firstGame(yes)">Yes</button>
-            <button type="button" class="btn btn-danger px-5 my-2" onclick="firstGame(no)">No</button>
+            <button type="button" class="btn btn-success px-5 my-2" onclick="firstGame(yes)">Yes</button> <!--if user clicks yes, instruction screen will pop up-->
+            <button type="button" class="btn btn-danger px-5 my-2" onclick="firstGame(no)">No</button> <!--If user clicks no, it will go right to the select player screen-->
         </div>
+        <!-- instructions page if user selects yes as their first time plauing -->
         <div id="instructionPage" class="m-5 px-3">
             <h1>Instructions</h1>
             <div class="instructions">
@@ -60,6 +63,100 @@
             </div>
             <button class="btn btn-danger my-3 px-5" onclick="understandGame()">Okay</button>
         </div>
+        <div id="selectPlayersPage" class="m-5 px-3">
+          <div class="largerSelectPlayer d-sm-none d-md-block">
+            <h1 class="my-3">Select the number of players.</h1>
+          <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(2)">2</button>
+          <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(3)">3</button>
+          <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(4)">4</button>
+          </div>
+          <div class="smallSelectPlayer d-sm-block d-md-none">
+            <h1>Since you are on a mobile screen, your only option is to play as 1 player. If you want to play with multiple people, please go on a larger screen.</h1>
+            <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(1)">Ok</button>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center align-items-center d-flex">
+        <div class="largerSelectPlayer d-sm-none d-md-block my-3">
+          <div id="twoCharacters">
+            <div class="col-md-6 my-3">
+              
+            </div>
+            <div class="col-md-6 my-3">
+              <div class="card">
+              <div id="playerTwoTwoPlayers" class="carousel slide card-img-top" data-bs-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li
+                      data-bs-target="#playerTwoTwoPlayers"
+                      data-bs-slide-to="0"
+                      class="active"
+                      aria-current="true"
+                      aria-label="First slide"
+                    ></li>
+                    <li
+                      data-bs-target="#playerTwoTwoPlayers"
+                      data-bs-slide-to="1"
+                      aria-label="Second slide"
+                    ></li>
+                    <li
+                      data-bs-target="#playerTwoTwoPlayers"
+                      data-bs-slide-to="2"
+                      aria-label="Third slide"
+                    ></li>
+                  </ol>
+                  <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                      <img
+                        src="holder.js/900x500/auto/#777:#555/text:First slide"
+                        class="w-100 d-block"
+                        alt="First slide"
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="holder.js/900x500/auto/#666:#444/text:Second slide"
+                        class="w-100 d-block"
+                        alt="Second slide"
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="holder.js/900x500/auto/#666:#444/text:Third slide"
+                        class="w-100 d-block"
+                        alt="Third slide"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#playerTwoTwoPlayers"
+                    data-bs-slide="prev"
+                  >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#playerTwoTwoPlayers"
+                    data-bs-slide="next"
+                  >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+                
+                <div class="card-body">
+                  <input type="text" name="" id="playerTwoName-1">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="threeCharacters"></div>
+          <div id="fourCharacters"></div>
+        </div>
+        <div class="smallSelectPlayer d-sm-block d-md-none my-3"></div>
       </div>
     </main>
     <footer>
