@@ -11,3 +11,7 @@
     height: 350px;
     overflow: scroll;
 }
+#selectPlayersPage {
+  background-color: cornflowerblue;
+  margin: auto;
+}
