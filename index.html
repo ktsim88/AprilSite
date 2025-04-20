@@ -22,7 +22,7 @@
   <body>
     <main class="container text-center my-3 p-3">
       <!-- this row is for everything before game -->
-      <div class="row justify-content-center align-items-center">
+      <div class="row justify-content-center align-items-center d-none">
         <p class="mt-5 d-sm-block d-md-none">Disclaimer: this game is ideal for larger screens.</p>
         <!-- first page to play game -->
         <div id="landingPage" class="m-5 py-5 px-3">
@@ -264,11 +264,64 @@
       <!-- this row is for the game itself -->
        <div class="row justify-content-center align-items-center">
         <div id="gameArea" class="row my-3">
-          <div class="col-md-2"></div>
-          <div class="col-md-8"></div>
-          <div class="col-md-2"></div>
+          <div class="col-md-2">
+            <div class="row mb-5">
+              <div id="player1">
+              <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player1Img">
+              <div class="card-body" id="playerName1">Player 1's Name</div>
+            </div>
+          </div>
+          <div class="row my-5 blank">
+            <img src="imgs/dice1.png" alt="">
+            <button class="btn btn-primary mt-2">Roll Dice</button>
+          </div>
+            <div class="row">
+              <div id="player3">
+                <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player3Img">
+                <div class="card-body" id="playerName3">Player 3's Name</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div
+              class="alert alert-primary"
+              role="alert"
+            >
+              <strong>Alert Heading</strong> Some Word
+            </div>
+            </div>
+            <div class="boardContainer position-relative">
+              <img src="imgs/boardWithCards.png" alt="" id="gameBoard" class="img-fluid">
+              
+              <button class="btn cardBtn w-auto mx-2 btn-lg" id="popCultureCard">T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg" id="geographyCard">T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg" id="scienceCard">T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg" id="techCard">T</button>
+
+          </div>
+            
+          </div>
+          <div class="col-md-2">
+            <div class="row mb-5">
+              <div id="player2">
+              <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player2Img">
+              <div class="card-body" id="playerName2">Player 2's Name</div>
+            </div>
+          </div>
+          <div class="row my-5">
+            <img src="imgs/dice1.png" alt=""
+            id="diceImg">
+            <button class="btn btn-primary mt-2" onclick="rollDice()">Roll Dice</button>
+          </div>
+            <div class="row">
+              <div id="player3">
+                <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player4Img">
+                <div class="card-body" id="playerName4">Player 4's Name</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="smallGameArea" class="row my-3"></div>
        </div>
     </main>
     <footer>

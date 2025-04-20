@@ -15,3 +15,27 @@
   background-color: cornflowerblue;
   margin: auto;
 }
+/* game board and cards */
+.boardContainer {
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: relative;
+}
+#gameBoard {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+}
+.cardBtn {
+  background-color: red;
+  width: 12%;
+  height: 10%;
+  top: 80%;
+}
+.cardBtn:hover {
+  outline: 3px dashed blueviolet;
+}
+
+.blank {
+  opacity: 0;
+}
