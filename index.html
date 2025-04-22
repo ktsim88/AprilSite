@@ -67,9 +67,8 @@
           <!-- select numnber of players -->
           <div class="largerSelectPlayer d-sm-none d-md-block">
             <h1 class="my-3">Select the number of players.</h1>
+            <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(1)">1</button>
           <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(2)">2</button>
-          <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(3)">3</button>
-          <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(4)">4</button>
           </div>
           <!-- mobile screens automatically have one player only -->
           <div class="smallSelectPlayer d-sm-block d-md-none">
@@ -264,25 +263,15 @@
       <!-- this row is for the game itself -->
        <div class="row justify-content-center align-items-center">
         <div id="gameArea" class="row my-3">
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-12">
             <div class="row mb-5">
               <div id="player1">
               <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player1Img">
               <div class="card-body" id="playerName1">Player 1's Name</div>
             </div>
-          </div>
-          <div class="row my-5 blank">
-            <img src="imgs/dice1.png" alt="">
-            <button class="btn btn-primary mt-2">Roll Dice</button>
-          </div>
-            <div class="row">
-              <div id="player3">
-                <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player3Img">
-                <div class="card-body" id="playerName3">Player 3's Name</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8">
+          </div>          
+        </div>
+          <div class="col-md-8 col-sm-12">
             <div class="row">
               <div
               class="alert alert-primary"
@@ -300,9 +289,29 @@
               <button class="btn cardBtn w-auto mx-2 btn-lg" id="techCard">T</button>
 
           </div>
-            
+          <div class="row">
+            <div id="questionPopUp" class="my-auto">
+              <h2 id="userQuestion">Playyer's Question</h2>
+              <h1 id="question">Sample Question</h1>
+              <input type="text" id="userResponse">
+              <button type="submit" onclick="submitResponse()">Submit</button>
+              <p id="result">Your answer was correct</p>
+              <!-- timer here (youtube tutorial here: https://www.youtube.com/watch?v=F3-lK_-PQr0&t=81s) -->
+               <!-- end of youtube tutorial -->
+                <button onclick="nextTurn()" class="btn btn-primary nextTurn">Next Turn</button>
+                <button id="punishmentBtn" onclick="revealPunishment()" class="btn btn-danger">Punishment Wheel</button><!--will be d-none unless user gets answer wrong-->
+            </div>
+            <div id="punishmentWheelPage">
+              <h2 id="userPunishment">Player Name's Punishment</h2>
+              <!-- spinning wheel tutorial here:  -->
+               <!-- end of tutorial -->
+                <h5>Yikes your punishment is:</h5>
+                <button onclick="nextTurn()" class="btn btn-primary nextTurn">Next Turn</button>
+
+            </div>
           </div>
-          <div class="col-md-2">
+          </div>
+          <div class="col-md-2 col-sm-12">
             <div class="row mb-5">
               <div id="player2">
               <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player2Img">
@@ -314,12 +323,6 @@
             id="diceImg">
             <button class="btn btn-primary mt-2" onclick="rollDice()">Roll Dice</button>
           </div>
-            <div class="row">
-              <div id="player3">
-                <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player4Img">
-                <div class="card-body" id="playerName4">Player 4's Name</div>
-              </div>
-            </div>
           </div>
         </div>
        </div>
