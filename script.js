@@ -1,9 +1,9 @@
 // spinner tutorial js
 let wheel = document.querySelector(".wheel");
-let spinBtn = document.querySelector('.spinBtn')
+let spinBtn = document.getElementById('spinBtn')
 let value = Math.ceil(Math.random() * 3600)
-
-spinBtn.onclick = function () {
+function spinWheel() {
+    spinBtn.disabled = true
     wheel.style.transform = "rotate(" + value + "deg)"
     value += Math.ceil(Math.random() * 3600)
 }
