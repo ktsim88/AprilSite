@@ -20,7 +20,7 @@
   </head>
 
   <body>
-    <main class="container text-center my-3 p-3">
+    <main class="container text-center my-3">
       <!-- this row is for everything before game -->
       <div class="row justify-content-center align-items-center d-none">
         <p class="mt-5 d-sm-block d-md-none">Disclaimer: this game is ideal for larger screens.</p>
@@ -261,14 +261,19 @@
         </div>
       </div>
       <!-- this row is for the game itself -->
-       <div class="row justify-content-center align-items-center d-none">
+       <div class="row justify-content-center align-items-center">
         <div id="gameArea" class="row my-3">
           <div class="col-md-2 col-sm-12">
             <div class="row mb-5">
-              <div id="player1">
+              <div id="player1" class=" col-md-12 col-sm-6">
               <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player1Img">
               <div class="card-body" id="playerName1">Player 1's Name</div>
             </div>
+            <div class="col-sm-6 d-md-none d-sm-block">
+            <img src="imgs/dice1.png" alt=""
+            id="diceImgSM" width="200">
+            <button class="btn btn-primary mt-2" onclick="rollDice()">Roll Dice</button>
+          </div>
           </div>          
         </div>
           <div class="col-md-8 col-sm-12">
@@ -291,8 +296,8 @@
           </div>
           <!-- question pop up and punishment -->
           <div class="row">
-            <div id="questionPopUp" class="my-auto">
-              <h2 id="userQuestion">Playyer's Question</h2>
+            <div id="questionPopUp" class="my-5">
+              <h2 id="userQuestion" class="mt-5">Playyer's Question</h2>
               <h1 id="question">Sample Question</h1>
               <input type="text" id="userResponse">
               <button type="submit" onclick="submitResponse()">Submit</button>
@@ -303,17 +308,30 @@
                 <button onclick="nextTurn()" class="btn btn-primary nextTurn">Next Turn</button>
                 <button id="punishmentBtn" onclick="revealPunishment()" class="btn btn-danger">Punishment Wheel</button><!--will be d-none unless user gets answer wrong-->
             </div>
-            <div id="punishmentWheelPage">
-              <h2 id="userPunishment">Player Name's Punishment</h2>
-              <!-- spinning wheel tutorial here:  -->
+            <div id="punishmentWheelPage" class="align-items-center">
+              <h2 id="userNamePunishment">Player Name's Punishment</h2>    
+            <!-- spinner tutorial: https://www.youtube.com/watch?v=F3-lK_-PQr0&t=81s -->
+              <div class="spinnerContainer mt-5 ml-2">
+        <div class="spinBtn">Spin</div>
+        <div class="wheel">
+          <div class="number" style="--i:1;--clr:#de190b;"><span>1</span></div>
+          <div class="number" style="--i:2;--clr:#de5f0b;"><span>2</span></div>
+          <div class="number" style="--i:3;--clr:#de9f0b;"><span>3</span></div>
+          <div class="number" style="--i:4;--clr:#a9de0b;"><span>4</span></div>
+          <div class="number" style="--i:5;--clr:#16de0b;"><span>5</span></div>
+          <div class="number" style="--i:6;--clr:#0bdeda;"><span>6</span></div>
+          <div class="number" style="--i:7;--clr:#390bde;"><span>7</span></div>
+          <div class="number" style="--i:8;--clr:#980bde;"><span>8</span></div>
+        </div>
+      </div>
+       </div>
                <!-- end of tutorial -->
                 <h5>Yikes your punishment is:</h5>
                 <button onclick="nextTurn()" class="btn btn-primary nextTurn">Next Turn</button>
 
             </div>
           </div>
-          </div>
-          <div class="col-md-2 col-sm-12">
+          <div class="col-md-2 col-sm-12 d-block d-sm-none">
             <div class="row mb-5">
               <div id="player2">
               <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player2Img">
@@ -329,20 +347,7 @@
         </div>
        </div>
 
-       <div class="spinnerContainer">
-        <div class="spinBtn">Spin</div>
-        <div class="wheel">
-          <div class="number" style="--i:1;--clr:#de190b;"><span>1</span></div>
-          <div class="number" style="--i:2;--clr:#de5f0b;"><span>2</span></div>
-          <div class="number" style="--i:3;--clr:#de9f0b;"><span>3</span></div>
-          <div class="number" style="--i:4;--clr:#a9de0b;"><span>4</span></div>
-          <div class="number" style="--i:5;--clr:#16de0b;"><span>5</span></div>
-          <div class="number" style="--i:6;--clr:#0bdeda;"><span>6</span></div>
-          <div class="number" style="--i:7;--clr:#390bde;"><span>7</span></div>
-          <div class="number" style="--i:8;--clr:#980bde;"><span>8</span></div>
-        </div>
-        
-       </div>
+       
     </main>
     <footer>
       <!-- place footer here -->
