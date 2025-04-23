@@ -1,14 +1,13 @@
 #landingPage, #questionPage, #instructionPage, #questionPopUp, #punishmentWheelPage {
     background-color: rgb(159, 159, 255);
     margin: auto;
-  width: 90%;
   padding: 10px;
   border: 5px black solid;
   height: 800px;
+  transition-duration: 2s;
 }
 
 .instructions {
-    height: 350px;
     overflow: scroll;
 }
 #selectPlayersPage {

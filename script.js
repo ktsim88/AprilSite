@@ -47,3 +47,30 @@ function rollDice() {
         diceImgSM.src = 'imgs/dice6.png'
     }
 }
+//functions before the game
+//landing page to questionpage
+function playGame() {
+    let landingPage = document.getElementById('landingPage')
+    let questionPage = document.getElementById('questionPage')
+    landingPage.classList.add('d-none')
+    questionPage.classList.remove('d-none')
+    questionPage.classList.add('d-block')
+}
+//question page to either instruction page/select players page
+function firstGame(answer) {
+    if (answer === 'yes') {
+        document.getElementById('questionPage').classList.add('d-none')
+        document.getElementById('instructionPage').classList.remove('d-none')
+        document.getElementById('instructionPage').classList.add('d-block')
+    } else if (answer === 'no') {
+        document.getElementById('questionPage').classList.add('d-none')
+        document.getElementById('selectPlayersPage').classList.remove('d-none')
+        document.getElementById('selectPlayersPage').classList.add('d-block')
+    }
+}
+//if user clicks yes, instructions will pop up
+function understandGame() {
+    document.getElementById('instructionPage').classList.add('d-none')
+    document.getElementById('selectPlayersPage').classList.remove('d-none')
+    document.getElementById('selectPlayersPage').classList.add('d-block')
+}
