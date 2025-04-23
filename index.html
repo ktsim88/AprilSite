@@ -48,8 +48,8 @@
             <h1>Instructions</h1>
             <div class="instructions">
                 <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
-                    <h4 id="scrollspyHeading1">First heading</h4>
-                    <p>...</p>
+                    <h4 id="scrollspyHeading1">Overview</h4>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem reiciendis culpa voluptates facilis numquam, odio aliquid aspernatur cum repellendus quia assumenda soluta optio voluptatem dignissimos quos dolores quidem fugit delectus.</p>
                     <h4 id="scrollspyHeading2">Second heading</h4>
                     <p>...</p>
                     <h4 id="scrollspyHeading3">Third heading</h4>
@@ -65,17 +65,29 @@
         </div>
         <div id="selectPlayersPage" class="m-5 px-3 d-none">
           <!-- select numnber of players -->
-          <div class="row d-sm-none d-md-block">
-            <h1 class="my-3">Select the number of players.</h1>
-            <h1 class="d-md-none d-sm-block">Since you are on a mobile screen, your only option is to play as 1 player. If you want to play with two people, please go on a larger screen.</h1>
-            <button class="btn btn-primary p-5 my-2" onclick="selectedPlayers(1)">1</button>
-          <button class="btn btn-primary p-5 my-2 d-sm-none d-md-block" onclick="selectedPlayers(2)">2</button>
+          <div class="row justify-content-center">
+            <h1 class="my-3 text-center">Select the number of players.</h1>
+            <h1 class="d-md-none d-sm-block text-center">
+              Since you are on a mobile screen, your only option is to play as 1 player. 
+              If you want to play with two people, please go on a larger screen.
+            </h1>
+          
+            <!-- One Player Button -->
+            <div class="col-12 col-md-4 d-flex justify-content-center">
+              <button class="btn btn-primary my-2 px-3 w-100 selectorBtn" onclick="selectedPlayers(1)" type="button">One</button>
+            </div>
+          
+            <!-- Two Player Button -->
+            <div class="col-12 col-md-4 d-none d-md-flex justify-content-center">
+              <button class="btn btn-primary my-2 px-3 w-100 selectorBtn" onclick="selectedPlayers(2)" type="button">Two</button>
+            </div>
           </div>
+          
           <!-- row to let players select their character and their name -->
-          <div class="row justify-content-center align-items-center">
-            <div class="d-sm-none d-md-block my-3">
+          <div class="row justify-content-center align-items-center d-none" id="selectPlayerRow">
+            <div class="my-3">
               <div id="selectYourCharacter" class="row my-3">
-                <div class="col-md-6 my-3">
+                <div class="col-md-6 my-3" id="player1Card">
                   <div class="card">
                   <!-- carousel here -->
                   <div id="characterSelectionPlayerOne" class="carousel slide">
@@ -132,7 +144,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 my-3">
+                <div class="col-md-6 my-3" id="player2Card">
                   <div class="card">
                   <!-- carousel here -->
                   <div id="characterSelectionPlayerTwo" class="carousel slide">

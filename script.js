@@ -74,3 +74,19 @@ function understandGame() {
     document.getElementById('selectPlayersPage').classList.remove('d-none')
     document.getElementById('selectPlayersPage').classList.add('d-block')
 }
+
+function selectedPlayers(number) {
+    if (number === 1) {
+        document.getElementById('selectPlayerRow').classList.remove('d-none')
+        document.getElementById('player1Card').classList.add('col-12')
+        document.getElementById('player1Card').classList.remove('col-md-6')
+        document.getElementById('player2Card').classList.add('d-none')
+    } else if (number === 2) {
+        document.getElementById('selectPlayerRow').classList.remove('d-none')
+        document.getElementById('player2Card').classList.add('d-block')
+        document.getElementById('player1Card').classList.remove('col-12')
+        document.getElementById('player1Card').classList.add('col-md-6')
+        document.getElementById('player2Card').classList.remove('d-none')
+
+    }
+}
