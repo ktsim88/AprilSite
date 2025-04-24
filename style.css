@@ -29,6 +29,7 @@
   position: relative;
   width: 100%;
   max-width: 1000px;
+  max-height: 1000px;
 }
 .cardBtn {
   background-color: red;
@@ -38,6 +39,19 @@
 }
 .cardBtn:hover {
   outline: 3px dashed blueviolet;
+}
+
+#character1 {
+  position: absolute;
+  top: 50%;
+  left: 1%;
+  width: 50px;
+}
+#character2 {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  width: 50px;
 }
 /* tutorial of spinner css */
 *{
@@ -129,3 +143,8 @@ body {
   font-weight: 500;
 
 }
+/* caroself */
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  background-color: black;
+}
+
