@@ -221,6 +221,9 @@
             </div>
             <!-- dice -->
             <div class="row my-5">
+              <div class="col-sm-6">
+                
+              </div>
               <img src="imgs/dice1.png" alt=""
               id="diceImg">
               <button class="btn btn-primary mt-2" id="diceBtn" onclick="rollDice()">Roll Dice</button>
@@ -251,14 +254,20 @@
           </div>
           <!-- question pop up and punishment -->
           <div class="row">
-            <div id="questionPopUp" class="my-5 d-none">
+            <div id="questionPopUp" class="my-5">
               <h2 id="userQuestion" class="mt-5">Playyer's Question</h2>
               <h1 id="question">Sample Question</h1>
               <input type="text" id="userResponse">
               <button type="submit" onclick="submitResponse()">Submit</button>
               <p id="result">Your answer was correct</p>
-              <!-- timer here (youtube tutorial here: https://www.youtube.com/watch?v=F3-lK_-PQr0&t=81s) -->
-              
+                         <!--timer youtube tutorial: https://www.youtube.com/watch?v=js8YiWjrOrw  -->
+                         <div class="timerContainer">
+                          <p>Time Left:<span>10s</span></p>
+                          <div class="progress">
+                            <div class="progress-inner"></div>
+                          </div>
+                          <button class="btn btn-start">Start</button>
+                         </div>
                <!-- end of youtube tutorial -->
                 <button onclick="nextTurn()" class="btn btn-primary nextTurn">Next Turn</button>
                 <button id="punishmentBtn" onclick="revealPunishment()" class="btn btn-danger">Punishment Wheel</button><!--will be d-none unless user gets answer wrong-->
