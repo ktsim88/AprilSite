@@ -22,7 +22,7 @@
   <body>
     <main class="container text-center my-3">
       <!-- this row is for everything before game -->
-      <div class="row justify-content-center align-items-center">
+      <div class="row justify-content-center align-items-center" id="everythingBeforeGameRow">
         <p class="mt-5 d-sm-block d-md-none">Disclaimer: this game is ideal for larger screens.</p>
         <!-- first page to play game -->
         <div id="landingPage" class="m-5 py-5 px-3 justify-content-center align-items-center">
@@ -211,26 +211,26 @@
         </div>
       </div>
       <!-- this row is for the game itself -->
-       <div class="row justify-content-center align-items-center">
-        <div id="gameArea" class="row my-3 d-none">
+       <div class="gameContainer justify-content-center align-items-center">
+        <div id="gameArea" class="row d-none">
           <!-- player 1 -->
           <div class="col-md-2 col-sm-12">
             <div class="row mb-5">
-              <div id="player1" class=" col-md-12 col-sm-6">
-              <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player1Img">
-              <div class="card-body" id="playerName1">Player 1's Name</div>
-            </div>
-            <!-- dice -->
-            <div class="row my-5">
-              <div class="col-sm-6">
-                
+              <div id="player1" class="col-md-12 col-sm-6">
+                <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player1Img">
+                <div class="card-body" id="playerName1">Player 1's Name</div>
+                <p id="spaceCounter1">27 Spaces to the Crown</p>
               </div>
-              <img src="imgs/dice1.png" alt=""
-              id="diceImg">
-              <button class="btn btn-primary mt-2" id="diceBtn" onclick="rollDice()">Roll Dice</button>
+                <div class="col-sm-6 col-md-12">
+                  <img src="imgs/dice1.png" alt="" id="diceImg" class="img-fluid my-2">
+                <button class="btn btn-primary mt-2" id="diceBtn" onclick="rollDice()">Roll Dice</button>
+                </div>
             </div>
-          </div>          
-        </div>
+            
+            </div>
+            
+
+          
         <!-- game board -->
           <div class="col-md-8 col-sm-12">
             <div class="row">
@@ -238,16 +238,17 @@
               class="alert alert-primary"
               role="alert"
             >
-              <strong>Alert Heading</strong> Some Word
+              <h2 id="userTurnUpdater">Player 1's Turn</h2>
+              <p id="gameUpdater"></p>
             </div>
             </div>
             <div class="boardContainer position-relative">
               <img src="imgs/boardWithCards.png" alt="" id="gameBoard" class="img-fluid">
               <div class="row mx-5">
-                <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="popCultureCard">T</button>
-              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="geographyCard">T</button>
-              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="scienceCard">T</button>
-              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="techCard">T</button>
+                <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="popCultureCard" onclick="giveQuestion(popculture)">T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="geographyCard" onclick="giveQuestion(geography)">T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="scienceCard" onclick="giveQuestion(science)">T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="techCard" onclick="giveQuestion(tech)">T</button>
               </div>
               <img src="imgs/globe.png" alt="" id="character1">
               <img src="imgs/lego.png" alt="" id="character2">
@@ -298,17 +299,19 @@
             </div>
           </div>
           <!-- player 2 -->
-          <div class="col-md-2 col-sm-12 d-md-block d-sm-none">
+          <div class="col-md-2 col-sm-12 d-md-block" id="player2Here">
             <div class="row mb-5">
-              <div id="player2">
+              <div id="player2" class="d-none">
               <img src="https://picsum.photos/id/237/200/200" alt="" class="img-fluid" id="player2Img">
               <div class="card-body" id="playerName2">Player 2's Name</div>
+              <p id="spaceCounter2">27 Spaces to the Crown</p>
             </div>
           </div>
           
           </div>
         </div>
        </div>
+        
 
        
     </main>
