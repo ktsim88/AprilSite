@@ -3,6 +3,16 @@ let playerOneIMG = document.getElementById('player1Img')
 let playerTwoIMG = document.getElementById('player2Img')
 let playerName1 = document.getElementById('playerName1')
 let playerName2 = document.getElementById('playerName2')
+let character1 = document.getElementById('character1')
+let character2 = document.getElementById('character2')
+
+// variables in order to enable start btn
+let startBtn = document.getElementById('startBtn')
+startBtn.disabled = true
+let isCharacterSelected1 = false
+let isCharacterSelected2 = false
+let nameSubmitted1 = false
+let nameSubmitted2 = false
 // spinner tutorial js
 let wheel = document.querySelector(".wheel");
 let spinBtn = document.getElementById('spinBtn')
@@ -36,7 +46,7 @@ btnStart.addEventListener("click", () => {
         }
     }, 1000)
 })
-
+//changes color of timer
 const checkColors = (width) => {
     if (width > 60) {
         progressBar.style.background = 'green'
@@ -132,6 +142,8 @@ function selectCharacter(character) {
         chosenCharacter.textContent = 'You chose: Botty'
         playerOneIMG.src = 'imgs/robot.png'
     }
+    isCharacterSelected1 = true
+    startGameEnable()
 }
 
 function selectCharacter2(character) {
@@ -149,6 +161,8 @@ function selectCharacter2(character) {
         chosenCharacter.textContent = 'You chose: Botty'
         playerTwoIMG.src = 'imgs/robot.png'
     }
+    isCharacterSelected2 = true
+    startGameEnable()
 }
 //function to get user's name
 function submitName(player) {
@@ -157,8 +171,25 @@ function submitName(player) {
     if (player === 'user1') {
         name1 = document.getElementById('playerOneName').value
         document.getElementById('userName1').textContent = name1
+        nameSubmitted1 = true
     } else if (player === 'user2') {
         name2 = document.getElementById('playerTwoName').value
         document.getElementById('userName2').textContent = name2
+        nameSubmitted2 = true
     }
+    startGameEnable()
+}
+//function that will enable the start game button
+function startGameEnable() {
+    if (((isCharacterSelected1 && nameSubmitted1) && (isCharacterSelected2 && nameSubmitted2)) || (!isCharacterSelected2 && !nameSubmitted2)){
+        startBtn.disabled = false
+    } else {
+        startBtn.disabled = true
+    }
+}
+//page switches from select players page to the game area to begin the game
+function startGame() {
+    document.getElementById('selectPlayersPage').classList.add('d-none')
+    document.getElementById('gameArea').classList.remove('d-none')
+    document.getElementById('gameArea').classList.add('d-block')
 }
