@@ -3,11 +3,6 @@ let playerOneIMG = document.getElementById('player1Img')
 let playerTwoIMG = document.getElementById('player2Img')
 const myCarouselElement = document.querySelector('#characterSelectionPlayerOne')
 
-const carousel = new bootstrap.Carousel(myCarouselElement, {
-  interval: 2000,
-  touch: false
-})
-
 
 // spinner tutorial js
 let wheel = document.querySelector(".wheel");
@@ -18,7 +13,40 @@ function spinWheel() {
     wheel.style.transform = "rotate(" + value + "deg)"
     value += Math.ceil(Math.random() * 3600)
 }
+// timer tutorial
+const btnStart = document.querySelector(".btn-start")
+const timeSpan = document.querySelector('.time')
+const progressBar = document.querySelector('.progress-inner')
 
+btnStart.addEventListener("click", () => {
+    let interval = 30
+
+    let countDown = setInterval(() => {
+        interval--;
+
+        let progressWidth = interval / 30 * 100
+        if (interval > 0) {
+            checkColors(progressWidth)
+
+            progressBar.style.width = progressWidth + '%'
+            timeSpan.textContent = interval + "s"
+        } else {
+            clearInterval(countDown)
+            progressBar.style.width = "0%"
+            timeSpan.innerHTML = "too bad"
+        }
+    }, 1000)
+})
+
+const checkColors = (width) => {
+    if (width > 60) {
+        progressBar.style.background = 'green'
+    } else if (width > 30) {
+        progressBar.style.background = 'yellow'
+    } else {
+        progressBar.style.background = 'red'
+    }
+}
 
 function rollDice() {
     let diceNumber = Math.floor(Math.random()*6) + 1
