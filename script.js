@@ -1,9 +1,8 @@
 //variables for characters
 let playerOneIMG = document.getElementById('player1Img')
 let playerTwoIMG = document.getElementById('player2Img')
-const myCarouselElement = document.querySelector('#characterSelectionPlayerOne')
-
-
+let playerName1 = document.getElementById('playerName1')
+let playerName2 = document.getElementById('playerName2')
 // spinner tutorial js
 let wheel = document.querySelector(".wheel");
 let spinBtn = document.getElementById('spinBtn')
@@ -47,7 +46,7 @@ const checkColors = (width) => {
         progressBar.style.background = 'red'
     }
 }
-
+// function that randomizes dice rolls
 function rollDice() {
     let diceNumber = Math.floor(Math.random()*6) + 1
     let diceImg = document.getElementById('diceImg')
@@ -119,18 +118,35 @@ function selectedPlayers(number) {
 }
 // function that chooses character
 function selectCharacter(character) {
-    indicators.disabled = true
+    let chosenCharacter = document.getElementById('selectedCharacter')
     if (character === 'globe') {
-        document.getElementById('player1Card').disabled = true
-        playerCard.disabled = true
+        chosenCharacter.textContent = 'You chose: Globey'
+        playerOneIMG.src = 'imgs/globe.png'
     } else if (character === 'lego') {
-        document.getElementById('player1Card').disabled = true
-        playerCard.disabled = true
+        chosenCharacter.textContent = 'You chose: Blocky'
+        playerOneIMG.src = 'imgs/lego.png'
     } else if (character === 'flask') {
-        document.getElementById('player1Card').disabled = true
-        playerCard.disabled = true
+        chosenCharacter.textContent = 'You chose: Fizzy'
+        playerOneIMG.src = 'imgs/flask.png'
     } else if (character === 'robot') {
-        document.getElementById('player1Card').disabled = true
-        playerCard.disabled = true
+        chosenCharacter.textContent = 'You chose: Botty'
+        playerOneIMG.src = 'imgs/robot.png'
+    }
+}
+
+function selectCharacter2(character) {
+    let chosenCharacter = document.getElementById('selectedCharacter2')
+    if (character === 'globe') {
+        chosenCharacter.textContent = 'You chose: Globey'
+        playerTwoIMG.src = 'imgs/globe.png'
+    } else if (character === 'lego') {
+        chosenCharacter.textContent = 'You chose: Blocky'
+        playerTwoIMG.src = 'imgs/lego.png'
+    } else if (character === 'flask') {
+        chosenCharacter.textContent = 'You chose: Fizzy'
+        playerTwoIMG.src = 'imgs/flask.png'
+    } else if (character === 'robot') {
+        chosenCharacter.textContent = 'You chose: Botty'
+        playerTwoIMG.src = 'imgs/robot.png'
     }
 }
