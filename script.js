@@ -1,4 +1,4 @@
-//variables for characters
+//variables for characters that will be used in gameArea
 let playerOneIMG = document.getElementById('player1Img')
 let playerTwoIMG = document.getElementById('player2Img')
 let playerName1 = document.getElementById('playerName1')
@@ -148,5 +148,17 @@ function selectCharacter2(character) {
     } else if (character === 'robot') {
         chosenCharacter.textContent = 'You chose: Botty'
         playerTwoIMG.src = 'imgs/robot.png'
+    }
+}
+//function to get user's name
+function submitName(player) {
+    let name1 = ''
+    let name2 = ''
+    if (player === 'user1') {
+        name1 = document.getElementById('playerOneName').value
+        document.getElementById('userName1').textContent = name1
+    } else if (player === 'user2') {
+        name2 = document.getElementById('playerTwoName').value
+        document.getElementById('userName2').textContent = name2
     }
 }
