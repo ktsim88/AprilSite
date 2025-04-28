@@ -368,14 +368,20 @@ function submitName(player) {
 //function that will enable the start game button
 function startGameEnable() {
   if (
-    (isCharacterSelected1 &&
+    isCharacterSelected1 &&
       nameSubmitted1 &&
       isCharacterSelected2 &&
-      nameSubmitted2) ||
-    (!isCharacterSelected2 && !nameSubmitted2)
-  ) {
+      nameSubmitted2) {
     startBtn.disabled = false;
-  } else {
+    character2.classList.remove('d-none')
+    character2.classList.add('d=block')
+    document.getElementById('player2').classList.remove('d-none')
+  } else if ((isCharacterSelected1 &&
+    nameSubmitted1) && (!isCharacterSelected2 && !nameSubmitted2)) {
+    startBtn.disabled = false;
+    character2.classList.add('d-none')
+    
+    } else {
     startBtn.disabled = true;
   }
 }
