@@ -456,8 +456,8 @@
       </div>
       <!-- this row is for the game itself -->
       <div class="gameContainer justify-content-center align-items-center mx-3 d-none" id="gameArea">
-
-        <div class="row">
+<!-- game row -->
+        <div class="row" id="gameRow">
           <!-- player 1 -->
           <div class="col-md-2">
             <div class="col-sm-6 col-md-12">
@@ -545,81 +545,6 @@
               <img src="imgs/globe.png" alt="" id="character1" class="my-1" />
               <img src="imgs/lego.png" alt="" id="character2" class="my-1" />
             </div>
-            <!-- question pop up and punishment -->
-            <div class="row">
-              <div id="questionPopUp" class="my-5 d-none">
-                <h2 id="userQuestion" class="mt-5">Playyer's Question</h2>
-                <h1 id="question">Sample Question</h1>
-                <input type="text" id="userResponse" />
-                <button
-                  type="submit"
-                  onclick="submitResponse()"
-                  class="btn btn-danger"
-                >
-                  Submit
-                </button>
-                <p id="result"></p>
-                <!--timer youtube tutorial: https://www.youtube.com/watch?v=js8YiWjrOrw  -->
-                <div class="timerContainer">
-                  <div class="progress">
-                    <div class="progress-inner"></div>
-                  </div>
-                </div>
-                <!-- end of youtube tutorial -->
-                <button
-                  onclick="nextTurn()"
-                  class="btn btn-primary d-none"
-                  id="nextBtn"
-                >
-                  Next Turn
-                </button>
-                <button
-                  id="punishmentBtn"
-                  onclick="revealPunishment()"
-                  class="btn btn-danger d-none"
-                >
-                  Punishment Wheel</button
-                ><!--will be d-none unless user gets answer wrong-->
-              </div>
-              <div id="punishmentWheelPage" class="align-items-center d-none">
-                <h2 id="userNamePunishment">Player Name's Punishment</h2>
-                <!-- spinner tutorial: https://www.youtube.com/watch?v=F3-lK_-PQr0&t=81s -->
-                <div class="spinnerContainer mt-5 ml-2">
-                  <div id="spinBtn" onclick="spinWheel()">Spin</div>
-                  <div class="wheel">
-                    <div class="number" style="--i: 1; --clr: #de190b">
-                      <span>1</span>
-                    </div>
-                    <div class="number" style="--i: 2; --clr: #de5f0b">
-                      <span>2</span>
-                    </div>
-                    <div class="number" style="--i: 3; --clr: #de9f0b">
-                      <span>3</span>
-                    </div>
-                    <div class="number" style="--i: 4; --clr: #a9de0b">
-                      <span>4</span>
-                    </div>
-                    <div class="number" style="--i: 5; --clr: #16de0b">
-                      <span>5</span>
-                    </div>
-                    <div class="number" style="--i: 6; --clr: #0bdeda">
-                      <span>6</span>
-                    </div>
-                    <div class="number" style="--i: 7; --clr: #390bde">
-                      <span>7</span>
-                    </div>
-                    <div class="number" style="--i: 8; --clr: #980bde">
-                      <span>8</span>
-                    </div>
-                  </div>
-                </div>
-                <!-- end of tutorial -->
-                <h5>Yikes your punishment is:</h5>
-                <button onclick="nextTurn()" class="btn btn-primary nextTurn">
-                  Next Turn
-                </button>
-              </div>
-            </div>
           </div>
           <!-- player 2 -->
           <div class="col-md-2 d-md-block">
@@ -633,6 +558,76 @@
                 <div class="card-body" id="playerName2">Player 2's Name</div>
                 <p id="spaceCounter2">27 Spaces to the Crown</p>
               </div>
+          </div>
+        </div>
+        <!-- row question pop up and punishment -->
+        <div class="row" id="questionRow">
+          <div id="questionPopUp" class="my-5 d-none">
+            <h2 id="userQuestion" class="mt-5">Playyer's Question</h2>
+            <h1 id="question">Sample Question</h1>
+            <input type="text" id="userResponse" />
+            <button
+              type="submit"
+              onclick="submitResponse()"
+              class="btn btn-danger"
+            >
+              Submit
+            </button>
+            <p id="result"></p>
+            <!--timer youtube tutorial: https://www.youtube.com/watch?v=js8YiWjrOrw  -->
+            <div class="timerContainer">
+              <div class="progress">
+                <div class="progress-inner"></div>
+              </div>
+            </div>
+            <!-- end of youtube tutorial -->
+            <button
+              onclick="nextTurn()"
+              class="btn btn-primary d-none"
+              id="nextBtn"
+            >
+              Next Turn
+            </button>
+            <button
+              id="punishmentBtn"
+              onclick="revealPunishment()"
+              class="btn btn-danger d-none"
+            >
+              Punishment Wheel</button
+            ><!--will be d-none unless user gets answer wrong-->
+          </div>
+          <div id="punishmentWheelPage" class="align-items-center justify-content-center d-none">
+            <h2 id="userNamePunishment">Player Name's Punishment</h2>
+            <!-- spinner tutorial: https://www.youtube.com/watch?v=F3-lK_-PQr0&t=81s -->
+            <div class="spinnerContainer mx-5 ms-2">
+              <div id="spinBtn" onclick="spinWheel()">Spin</div>
+              <div id="wheel">
+                <div class="number" style="--i: 1; --clr: #de190b" id="item1">
+                  <span>Skip Next Turn</span>
+                </div>
+                <div class="number" style="--i: 2; --clr: #de5f0b" id="item2">
+                  <span>Go Back 5 Spaces</span>
+                </div>
+                <div class="number" style="--i: 3; --clr: #de9f0b" id="item3">
+                  <span>No punishment</span>
+                </div>
+                <div class="number" style="--i: 4; --clr: #a9de0b" id="item4">
+                  <span>Go back to the start</span>
+                </div>
+                <div class="number" style="--i: 5; --clr: #16de0b" id="item5">
+                  <span>Move back 5 spaces</span>
+                </div>
+                <div class="number" style="--i: 6; --clr: #0bdeda" id="item6">
+                  <span>Go back 10 spaces</span>
+                </div>
+                </div>
+              </div>
+              <h5 id="punishmentUpdate">Yikes your punishment is:</h5>
+            <button onclick="nextTurn()" class="btn btn-primary nextTurn">
+              Next Turn
+            </button>
+            </div>
+            
           </div>
         </div>
       </div>

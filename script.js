@@ -210,14 +210,49 @@ let topic = ['Pop Culture', 'Geography', 'Science', 'Technology']
 let space = ''
 
 // spinner tutorial js
-let wheel = document.querySelector(".wheel");
+let wheel = document.getElementById("wheel");
 let spinBtn = document.getElementById("spinBtn");
 let value = Math.ceil(Math.random() * 3600);
+let items = [
+  document.getElementById('item1'),
+  document.getElementById('item2'),
+  document.getElementById('item3'),
+  document.getElementById('item4'),
+  document.getElementById('item5'),
+  document.getElementById('item6')
+]
 function spinWheel() {
   spinBtn.disabled = true;
-  wheel.style.transform = "rotate(" + value + "deg)";
-  value += Math.ceil(Math.random() * 3600);
+
+  let rotation = value;
+  wheel.style.transition = "transform 4s ease-out";
+  wheel.style.transform = "rotate(" + rotation + "deg)";
+  
+  value += Math.ceil(Math.random() * 3600); // increase for next spin
+
+  setTimeout(() => {
+    const degPerSegment = 360 / items.length;
+    const finalDeg = ((rotation % 360) + 360) % 360;
+
+    const selectedIndex = Math.floor(
+      (360 - finalDeg + degPerSegment / 2) % 360 / degPerSegment
+    );
+
+    const punishment = items[selectedIndex].innerText.trim();
+    punishmentUpdate = document.getElementById('punishmentUpdate')
+      punishmentUpdate.textContent = `Yikes! Your punishment is ${punishment}!`
+    
+
+    spinBtn.disabled = false;
+  }, 4200);
+
+  if (punishment = items[1]){
+    currentPlayerSpace-5
+    updateGame()
+  }
 }
+
+
 // timer tutorial
 const btnStart = document.querySelector(".btn-start");
 const progressBar = document.querySelector(".progress-inner");
@@ -493,7 +528,7 @@ function giveQuestion(topicCard) {
   const questionPopUp = document.getElementById('questionPopUp');
   questionPopUp.classList.remove('d-none');
   questionPopUp.classList.add('d-block');
-  document.getElementById('mainGame').classList.add('d-none')
+  document.getElementById('gameRow').classList.add('d-none')
   document.getElementById('userQuestion').textContent = `${currentPlayer}'s Question`;
   document.getElementById('question').textContent = question;
 
