@@ -33,6 +33,7 @@ let currentPlayerSpace = 0
 let playerSpace1 = 0
 let playerSpace2 = 0
 const lastSpace = 27
+let correctAnswer = ''
 //question and answer arrays; the question with the answer will be based on their index (pc = Pop culture); index number will be the same
 let pcQuestions = [
   "What is the virtual currency used in Roblox",
@@ -494,5 +495,30 @@ function giveQuestion(topicCard) {
   questionPopUp.classList.add('d-block');
   document.getElementById('userQuestion').textContent = `${currentPlayer}'s Question`;
   document.getElementById('question').textContent = question;
+
+  startTimer()
+
+}
+function submitResponse() {
+  let userResponse = document.getElementById('userResponse').value.trim()
+  let nextBtn = document.getElementById('nextBtn')
+  let punishmentBtn = document.getElementById('punishmentBtn')
+  let result = document.getElementById('result')
+
+  if (userResponse.toLowerCase() === correctAnswer.toLowerCase()) {
+    // Correct answer: Show Next Turn button
+    nextBtn.classList.remove('d-none');
+    punishmentBtn.classList.add('d-none');
+    result.textContent = `Well done! The correct Answer is ${correctAnswer}.`
+  } else {
+    // Incorrect answer: Show Punishment Wheel button
+    nextBtn.classList.add('d-none');
+    punishmentBtn.classList.remove('d-none');
+    result.textContent = `Yikes! The correct Answer is ${correctAnswer}.`
+  }
+}
+function revealPunishment() {
+  document.getElementById('questionPopUp').classList.add('d-none')
+  document.getElementById('questionPopUp').classList.remove('d-block')
 
 }

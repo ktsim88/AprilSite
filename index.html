@@ -261,7 +261,7 @@
               <h1 id="question">Sample Question</h1>
               <input type="text" id="userResponse">
               <button type="submit" onclick="submitResponse()" class="btn btn-danger">Submit</button>
-              <p id="result">Your answer was correct</p>
+              <p id="result"></p>
                          <!--timer youtube tutorial: https://www.youtube.com/watch?v=js8YiWjrOrw  -->
                          <div class="timerContainer">
                           <div class="progress">
@@ -269,8 +269,8 @@
                           </div>
                          </div>
                <!-- end of youtube tutorial -->
-                <button onclick="nextTurn()" class="btn btn-primary nextTurn">Next Turn</button>
-                <button id="punishmentBtn" onclick="revealPunishment()" class="btn btn-danger">Punishment Wheel</button><!--will be d-none unless user gets answer wrong-->
+                <button onclick="nextTurn()" class="btn btn-primary d-none" id="nextBtn">Next Turn</button>
+                <button id="punishmentBtn" onclick="revealPunishment()" class="btn btn-danger d-none">Punishment Wheel</button><!--will be d-none unless user gets answer wrong-->
             </div>
             <div id="punishmentWheelPage" class="align-items-center d-none">
               <h2 id="userNamePunishment">Player Name's Punishment</h2>    
