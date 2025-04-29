@@ -493,6 +493,7 @@ function giveQuestion(topicCard) {
   const questionPopUp = document.getElementById('questionPopUp');
   questionPopUp.classList.remove('d-none');
   questionPopUp.classList.add('d-block');
+  document.getElementById('mainGame').classList.add('d-none')
   document.getElementById('userQuestion').textContent = `${currentPlayer}'s Question`;
   document.getElementById('question').textContent = question;
 
@@ -520,5 +521,8 @@ function submitResponse() {
 function revealPunishment() {
   document.getElementById('questionPopUp').classList.add('d-none')
   document.getElementById('questionPopUp').classList.remove('d-block')
+  document.getElementById('punishmentWheelPage').classList.remove('d-none')
+  document.getElementById('punishmentWheelPage').classList.add('d-block')
+
 
 }
