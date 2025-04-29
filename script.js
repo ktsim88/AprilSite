@@ -450,9 +450,27 @@ function startGame() {
 function updateGame() {
   gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
 }
+//adding event listeners so  when card is called, this topic will show up
+popCultureCard.addEventListener("click", function() {
+  giveQuestion('popculture');
+});
+
+geographyCard.addEventListener("click", function() {
+  giveQuestion('geography');
+});
+
+scienceCard.addEventListener("click", function() {
+  giveQuestion('science');
+});
+
+techCard.addEventListener("click", function() {
+  giveQuestion('technology');
+});
+
 
 function giveQuestion(topicCard) {
-  let question, answer;
+  let question = ''
+  let answer = ''
   if (topicCard === 'popculture') {
     const questionIndex = Math.floor(Math.random() * pcQuestions.length)
     question = pcQuestions[questionIndex]
