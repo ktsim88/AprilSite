@@ -5,7 +5,9 @@ let playerName1 = document.getElementById("playerName1");
 let playerName2 = document.getElementById("playerName2");
 let character1 = document.getElementById("character1");
 let character2 = document.getElementById("character2");
-
+let player1 = ''
+let player2 = ''
+let currentPlayer = ''
 // variables in order to enable start btn
 let startBtn = document.getElementById("startBtn");
 startBtn.disabled = true;
@@ -19,8 +21,10 @@ let spaceCounter1 = document.getElementById("spaceCounter1");
 let spaceCounter2 = document.getElementById("spaceCounter2");
 let gameUpdater = document.getElementById("gameUpdater");
 let userTurnUpdater = document.getElementById("userTurnUpdater");
-spaceCounter1 = 27;
-spaceCounter2 = 27;
+let currentPlayerSpace = 0
+let playerSpace1 = 0
+let playerSpace2 = 0
+const lastSpace = 27
 //question and answer arrays; the question with the answer will be based on their index (pc = Pop culture); index number will be the same
 let pcQuestions = [
   "What is the virtual currency used in Roblox",
@@ -191,7 +195,10 @@ let techAnswers = [
   "South Korea",
   "Light Emitting Diode",
 ];
-
+//variables for board (color/number space)
+let color = ['red', 'yellow', 'green', 'blue']
+let topic = ['Pop Culture', 'Geography', 'Science', 'Technology']
+let space = ''
 //dice variables
 let diceNumber = Math.floor(Math.random() * 6) + 1;
 let diceImg = document.getElementById("diceImg");
@@ -244,20 +251,42 @@ function rollDice() {
   //disables button immediately
   diceBtn.disabled = true;
 
-  //larger screens
   if (diceNumber === 1) {
     diceImg.src = "imgs/dice1.png";
+    currentPlayer +1
   } else if (diceNumber === 2) {
     diceImg.src = "imgs/dice2.png";
+    currentPlayer +2;
   } else if (diceNumber === 3) {
     diceImg.src = "imgs/dice3.png";
+    currentPlayer +3
   } else if (diceNumber === 4) {
     diceImg.src = "imgs/dice4.png";
+    currentPlayer +4
   } else if (diceNumber === 5) {
     diceImg.src = "imgs/dice5.png";
+    currentPlayer +5
   } else if (diceNumber === 6) {
     diceImg.src = "imgs/dice6.png";
+    currentPlayer +6
   }
+  if (space === 1 || 5 || 9 || 13 || 17 || 21 || 25) {
+    color = color[0]
+    topic = topic[0]
+  } else if (space === 2 || 6 || 10 || 14 || 18 || 22 || 26) {
+    color = color[1]
+    topic = topic[1]
+  } else if (space === 3 || 7 || 11 || 15 || 19 || 23) {
+    color = color[2]
+    topic = topic[2]
+  } else if (space === 4 || 8 || 12 || 16 || 20 || 24) {
+    color = color[3]
+    topic = topic[3]
+  }
+  // else if (space === 27) {
+  //   endGame()
+  //   }
+  updateGame()
 }
 //functions before the game
 //landing page to questionpage
@@ -375,7 +404,7 @@ function startGameEnable() {
     startBtn.disabled = false;
     character2.classList.remove('d-none')
     character2.classList.add('d=block')
-    document.getElementById('player2').classList.remove('d-none')
+    document.getElementById('player2gameCard').classList.remove('d-none')
   } else if ((isCharacterSelected1 &&
     nameSubmitted1) && (!isCharacterSelected2 && !nameSubmitted2)) {
     startBtn.disabled = false;
@@ -387,8 +416,17 @@ function startGameEnable() {
 }
 //page switches from select players page to the game area to begin the game
 function startGame() {
+  currentPlayer = player1
   document.getElementById("selectPlayersPage").classList.add("d-none");
   document.getElementById("everythingBeforeGameRow").classList.add("d-none");
   document.getElementById("gameArea").classList.remove("d-none");
   document.getElementById("gameArea").classList.add("d-block");
+  
+  userTurnUpdater.textContent = `${playerName1.textContent}'s Turn`
+  gameUpdater.textContent = `Roll the Dice`
+
+}
+
+function updateGame() {
+  gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
 }
