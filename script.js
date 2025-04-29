@@ -8,6 +8,11 @@ let character2 = document.getElementById("character2");
 let player1 = ''
 let player2 = ''
 let currentPlayer = ''
+//card buttons
+let popCultureCard = document.getElementById('popCultureCard')
+let geographyCard = document.getElementById('geographyCard')
+let scienceCard = document.getElementById('scienceCard')
+let techCard = document.getElementById('techCard')
 // variables in order to enable start btn
 let startBtn = document.getElementById("startBtn");
 startBtn.disabled = true;
@@ -15,7 +20,10 @@ let isCharacterSelected1 = false;
 let isCharacterSelected2 = false;
 let nameSubmitted1 = false;
 let nameSubmitted2 = false;
-
+  //dice variables
+  let diceNumber = Math.floor(Math.random() * 6) + 1;
+  let diceImg = document.getElementById("diceImg");
+  let diceBtn = document.getElementById("diceBtn");
 //variables for actual game
 let spaceCounter1 = document.getElementById("spaceCounter1");
 let spaceCounter2 = document.getElementById("spaceCounter2");
@@ -199,10 +207,7 @@ let techAnswers = [
 let color = ['red', 'yellow', 'green', 'blue']
 let topic = ['Pop Culture', 'Geography', 'Science', 'Technology']
 let space = ''
-//dice variables
-let diceNumber = Math.floor(Math.random() * 6) + 1;
-let diceImg = document.getElementById("diceImg");
-let diceBtn = document.getElementById("diceBtn");
+
 // spinner tutorial js
 let wheel = document.querySelector(".wheel");
 let spinBtn = document.getElementById("spinBtn");
@@ -214,10 +219,9 @@ function spinWheel() {
 }
 // timer tutorial
 const btnStart = document.querySelector(".btn-start");
-const timeSpan = document.querySelector(".time");
 const progressBar = document.querySelector(".progress-inner");
 
-btnStart.addEventListener("click", () => {
+function startTimer() {
   let interval = 30;
 
   let countDown = setInterval(() => {
@@ -228,14 +232,12 @@ btnStart.addEventListener("click", () => {
       checkColors(progressWidth);
 
       progressBar.style.width = progressWidth + "%";
-      timeSpan.textContent = interval + "s";
     } else {
       clearInterval(countDown);
       progressBar.style.width = "0%";
-      timeSpan.innerHTML = "too bad";
     }
   }, 1000);
-});
+};
 //changes color of timer
 const checkColors = (width) => {
   if (width > 60) {
@@ -248,40 +250,54 @@ const checkColors = (width) => {
 };
 // function that randomizes dice rolls
 function rollDice() {
+
   //disables button immediately
   diceBtn.disabled = true;
 
   if (diceNumber === 1) {
     diceImg.src = "imgs/dice1.png";
-    currentPlayer +1
+    currentPlayerSpace +=1
   } else if (diceNumber === 2) {
     diceImg.src = "imgs/dice2.png";
-    currentPlayer +2;
+    currentPlayerSpace += 2;
   } else if (diceNumber === 3) {
     diceImg.src = "imgs/dice3.png";
-    currentPlayer +3
+    currentPlayerSpace +=3
   } else if (diceNumber === 4) {
     diceImg.src = "imgs/dice4.png";
-    currentPlayer +4
+    currentPlayerSpace +=4
   } else if (diceNumber === 5) {
     diceImg.src = "imgs/dice5.png";
-    currentPlayer +5
+    currentPlayerSpace +=5
   } else if (diceNumber === 6) {
     diceImg.src = "imgs/dice6.png";
-    currentPlayer +6
+    currentPlayerSpace +=6
   }
-  if (space === 1 || 5 || 9 || 13 || 17 || 21 || 25) {
-    color = color[0]
-    topic = topic[0]
-  } else if (space === 2 || 6 || 10 || 14 || 18 || 22 || 26) {
-    color = color[1]
-    topic = topic[1]
-  } else if (space === 3 || 7 || 11 || 15 || 19 || 23) {
-    color = color[2]
-    topic = topic[2]
-  } else if (space === 4 || 8 || 12 || 16 || 20 || 24) {
-    color = color[3]
-    topic = topic[3]
+
+  if (currentPlayer === player1) {
+    playerSpace1 = currentPlayerSpace;
+    space = playerSpace1;
+  } else {
+    playerSpace2 = currentPlayerSpace;
+    space = playerSpace2;
+  }
+
+  if ([1,5,9,13,17,21,25].includes(space)) {
+    color = 'red'
+    topic = 'Pop Culture'
+    popCultureCard.disabled = false
+  } else if ([2,6,10,14,18,22,26].includes(space)) {
+    color = 'yellow'
+    topic = 'Geography'
+    geographyCard.disabled = false
+  } else if ([3,7,11,15,19,23].includes(space)) {
+    color = 'green'
+    topic = 'Science'
+    scienceCard.disabled = false
+  } else if ([4,8,12,16,20,24].includes(space)) {
+    color = 'blue'
+    topic = 'Technology'
+    techCard.disabled = false
   }
   // else if (space === 27) {
   //   endGame()
@@ -421,6 +437,10 @@ function startGame() {
   document.getElementById("everythingBeforeGameRow").classList.add("d-none");
   document.getElementById("gameArea").classList.remove("d-none");
   document.getElementById("gameArea").classList.add("d-block");
+  popCultureCard.disabled = true
+  geographyCard.disabled = true
+  scienceCard.disabled = true
+  techCard.disabled = true
   
   userTurnUpdater.textContent = `${playerName1.textContent}'s Turn`
   gameUpdater.textContent = `Roll the Dice`
@@ -429,4 +449,32 @@ function startGame() {
 
 function updateGame() {
   gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
+}
+
+function giveQuestion(topicCard) {
+  let question, answer;
+  if (topicCard === 'popculture') {
+    const questionIndex = Math.floor(Math.random() * pcQuestions.length)
+    question = pcQuestions[questionIndex]
+    answer = pcAnswers[questionIndex]
+  } else if (topicCard === 'geography') {
+    const questionIndex = Math.floor(Math.random() * geoQuestions.length)
+    question = geoQuestions[questionIndex]
+    answer = geoAnswers[questionIndex]
+  } else if (topicCard === 'science') {
+    const questionIndex = Math.floor(Math.random() * sciQuestions.length)
+    question = sciQuestions[questionIndex]
+    answer = sciAnswers[questionIndex]
+  } else if (topicCard === 'technology') {
+    const questionIndex = Math.floor(Math.random() * techQuestions.length)
+    question = techQuestions[questionIndex]
+    answer = techAnswers[questionIndex]
+  }
+
+  const questionPopUp = document.getElementById('questionPopUp');
+  questionPopUp.classList.remove('d-none');
+  questionPopUp.classList.add('d-block');
+  document.getElementById('userQuestion').textContent = `${currentPlayer}'s Question`;
+  document.getElementById('question').textContent = question;
+
 }

@@ -245,10 +245,10 @@
             <div class="boardContainer position-relative">
               <img src="imgs/boardWithCards.png" alt="" id="gameBoard" class="img-fluid">
               <div class="row mx-5">
-                <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="popCultureCard" onclick="giveQuestion(popculture)">T</button>
-              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="geographyCard" onclick="giveQuestion(geography)">T</button>
-              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="scienceCard" onclick="giveQuestion(science)">T</button>
-              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="techCard" onclick="giveQuestion(tech)">T</button>
+                <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="popCultureCard" onclick="giveQuestion(popculture)" disabled>T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="geographyCard" onclick="giveQuestion(geography)" disabled>T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="scienceCard" onclick="giveQuestion(science)" disabled>T</button>
+              <button class="btn cardBtn w-auto mx-2 btn-lg col-3" id="techCard" onclick="giveQuestion(technology)" disabled>T</button>
               </div>
               <img src="imgs/globe.png" alt="" id="character1" class="my-1">
               <img src="imgs/lego.png" alt="" id="character2" class="my-1">
@@ -260,15 +260,13 @@
               <h2 id="userQuestion" class="mt-5">Playyer's Question</h2>
               <h1 id="question">Sample Question</h1>
               <input type="text" id="userResponse">
-              <button type="submit" onclick="submitResponse()">Submit</button>
+              <button type="submit" onclick="submitResponse()" class="btn btn-danger">Submit</button>
               <p id="result">Your answer was correct</p>
                          <!--timer youtube tutorial: https://www.youtube.com/watch?v=js8YiWjrOrw  -->
                          <div class="timerContainer">
-                          <p>Time Left:<span>10s</span></p>
                           <div class="progress">
                             <div class="progress-inner"></div>
                           </div>
-                          <button class="btn-start">Start</button>
                          </div>
                <!-- end of youtube tutorial -->
                 <button onclick="nextTurn()" class="btn btn-primary nextTurn">Next Turn</button>
