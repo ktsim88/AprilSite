@@ -11,6 +11,7 @@
 }
 .instructions {
     overflow: scroll;
+    height: 500px;
 }
 #selectPlayersPage {
   background-color: cornflowerblue;
@@ -66,6 +67,10 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  font-family: "stevie-sans", sans-serif;
+font-weight: 400;
+font-style: normal;
+background-color: #004aad;
 }
 .spinnerContainer{
   position: relative;
@@ -179,4 +184,21 @@ body {
 }
 #player2 {
   background-color: chartreuse;
+}
+ol, ul {
+  font-family: "p22-nudgewink-pro", sans-serif;
+font-weight: 300;
+font-style: normal;
+}
+.title {
+  font-family: "cofo-kabeltouw-solid-0", sans-serif;
+font-weight: 400;
+font-style: normal;
+}
+.charcterName {
+  background-color: #004aad;
+  margin: 25px;
+}
+#selectedCharacter, #selectedCharacter2, #userName1, #userName2 {
+  background-color: yellow;
 }
