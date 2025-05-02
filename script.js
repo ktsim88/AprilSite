@@ -231,11 +231,11 @@ function spinWheel() {
   value += Math.ceil(Math.random() * 3600); // increase for next spin
 
   setTimeout(() => {
-    const degPerSegment = 360 / items.length;
-    const finalDeg = ((rotation % 360) + 360) % 360;
+    const degree = 360 / items.length; // max degree out of the length of the 6 items
+    const finalDeg = ((rotation % 360) + 360) % 360; //
 
     const selectedIndex = Math.floor(
-      (360 - finalDeg + degPerSegment / 2) % 360 / degPerSegment
+      (360 - finalDeg + degree / 2) % 360 / degree
     );
 
     const punishment = items[selectedIndex].innerText.trim();
@@ -506,23 +506,22 @@ techCard.addEventListener("click", function() {
 
 function giveQuestion(topicCard) {
   let question = ''
-  let answer = ''
   if (topicCard === 'popculture') {
     const questionIndex = Math.floor(Math.random() * pcQuestions.length)
     question = pcQuestions[questionIndex]
-    answer = pcAnswers[questionIndex]
+    correctAnswer = pcAnswers[questionIndex]
   } else if (topicCard === 'geography') {
     const questionIndex = Math.floor(Math.random() * geoQuestions.length)
     question = geoQuestions[questionIndex]
-    answer = geoAnswers[questionIndex]
+    correctAnswer = geoAnswers[questionIndex]
   } else if (topicCard === 'science') {
     const questionIndex = Math.floor(Math.random() * sciQuestions.length)
     question = sciQuestions[questionIndex]
-    answer = sciAnswers[questionIndex]
+    correctAnswer = sciAnswers[questionIndex]
   } else if (topicCard === 'technology') {
     const questionIndex = Math.floor(Math.random() * techQuestions.length)
     question = techQuestions[questionIndex]
-    answer = techAnswers[questionIndex]
+    correctAnswer = techAnswers[questionIndex]
   }
 
   const questionPopUp = document.getElementById('questionPopUp');
@@ -540,18 +539,26 @@ function submitResponse() {
   let nextBtn = document.getElementById('nextBtn')
   let punishmentBtn = document.getElementById('punishmentBtn')
   let result = document.getElementById('result')
+  let isCorrect = false
+//loop tht checks for correct
+  for (let i = 0; i === correctAnswer.length; i++){
+    if (userResponse === correctAnswer[i].toLowerCase()) {
+      isCorrect = true
+      break
+    }
+  }
 
-  if (userResponse.toLowerCase() === correctAnswer.toLowerCase()) {
-    // Correct answer: Show Next Turn button
+  if (isCorrect === true) {
     nextBtn.classList.remove('d-none');
     punishmentBtn.classList.add('d-none');
     result.textContent = `Well done! The correct Answer is ${correctAnswer}.`
-  } else {
-    // Incorrect answer: Show Punishment Wheel button
-    nextBtn.classList.add('d-none');
-    punishmentBtn.classList.remove('d-none');
-    result.textContent = `Yikes! The correct Answer is ${correctAnswer}.`
-  }
+} else {
+  // Incorrect answer: Show Punishment Wheel button
+  nextBtn.classList.add('d-none');
+  punishmentBtn.classList.remove('d-none');
+  result.textContent = `Yikes! The correct Answer is ${correctAnswer}.`
+}
+
 }
 function revealPunishment() {
   document.getElementById('questionPopUp').classList.add('d-none')
@@ -559,5 +566,17 @@ function revealPunishment() {
   document.getElementById('punishmentWheelPage').classList.remove('d-none')
   document.getElementById('punishmentWheelPage').classList.add('d-block')
 
+}
+
+function nextTurn() {
+  document.getElementById('questionPopUp').classList.remove('d-block')
+  document.getElementById('questionPopUp').classList.add('d-none')
+  document.getElementById('punishmentWheelPage').classList.add('d-none')
+  document.getElementById('punishmentWheelPage').classList.remove('d-block')
+  document.getElementById('gameRow').classList.remove('d-none')
+  diceBtn.disabled = false
+  document.getElementById('result').textContent = ''
+  document.getElementById('punishmentUpdate').textContent = ''
+  
 
 }

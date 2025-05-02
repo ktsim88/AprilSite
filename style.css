@@ -5,6 +5,7 @@
   border: 5px black solid;
   height: 800px;
   transition-duration: 2s;
+  position: relative;
 }
 #questionPopUp, #punishmentWheelPage {
   position: relative;
@@ -201,4 +202,7 @@ font-style: normal;
 }
 #selectedCharacter, #selectedCharacter2, #userName1, #userName2 {
   background-color: yellow;
+}
+#landingPage{
+  margin: 0%;
 }
