@@ -1,13 +1,9 @@
 //variables for characters that will be used in gameArea
 let playerOneIMG = document.getElementById("player1Img");
-let playerTwoIMG = document.getElementById("player2Img");
 let playerName1 = document.getElementById("playerName1");
-let playerName2 = document.getElementById("playerName2");
 let character1 = document.getElementById("character1");
-let character2 = document.getElementById("character2");
+
 let player1 = ''
-let player2 = ''
-let currentPlayer = ''
 //card buttons
 let popCultureCard = document.getElementById('popCultureCard')
 let geographyCard = document.getElementById('geographyCard')
@@ -16,22 +12,18 @@ let techCard = document.getElementById('techCard')
 // variables in order to enable start btn
 let startBtn = document.getElementById("startBtn");
 startBtn.disabled = true;
-let isCharacterSelected1 = false;
-let isCharacterSelected2 = false;
-let nameSubmitted1 = false;
-let nameSubmitted2 = false;
+let characterSelected = false;
+let nameSubmitted = false;
   //dice variables
-  let diceNumber = Math.floor(Math.random() * 6) + 1;
-  let diceImg = document.getElementById("diceImg");
-  let diceBtn = document.getElementById("diceBtn");
+let diceNumber = Math.floor(Math.random() * 6) + 1;
+let diceImg = document.getElementById("diceImg");
+let diceBtn = document.getElementById("diceBtn");
 //variables for actual game
-let spaceCounter1 = document.getElementById("spaceCounter1");
-let spaceCounter2 = document.getElementById("spaceCounter2");
+let spotCounter = document.getElementById("spaceCounter1");
 let gameUpdater = document.getElementById("gameUpdater");
 let userTurnUpdater = document.getElementById("userTurnUpdater");
 let currentPlayerSpace = 0
-let playerSpace1 = 0
-let playerSpace2 = 0
+let playerSpace = 0
 const lastSpace = 27
 let correctAnswer = ''
 //question and answer arrays; the question with the answer will be based on their index (pc = Pop culture); index number will be the same
@@ -311,7 +303,7 @@ function rollDice() {
     playerSpace1 = currentPlayerSpace;
     space = playerSpace1;
   } else {
-    playerSpace2 = currentPlayerSpace;
+    playerSpace1 = currentPlayerSpace;
     space = playerSpace2;
   }
 
@@ -354,31 +346,15 @@ function firstGame(answer) {
     document.getElementById("instructionPage").classList.add("d-block");
   } else if (answer === "no") {
     document.getElementById("questionPage").classList.add("d-none");
-    document.getElementById("selectPlayersPage").classList.remove("d-none");
-    document.getElementById("selectPlayersPage").classList.add("d-block");
+    document.getElementById("characterSelectionPage").classList.remove("d-none");
+    document.getElementById("characterSelectionPage").classList.add("d-block");
   }
 }
 //if user clicks yes, instructions will pop up
 function understandGame() {
   document.getElementById("instructionPage").classList.add("d-none");
-  document.getElementById("selectPlayersPage").classList.remove("d-none");
-  document.getElementById("selectPlayersPage").classList.add("d-block");
-}
-// function that allowers users to select either one or two players
-function selectedPlayers(number) {
-  if (number === 1) {
-    document.getElementById("selectPlayerRow").classList.remove("d-none");
-    document.getElementById("player2Card").classList.add("d-none");
-    document.getElementById("divider1").classList.remove("d-none");
-    document.getElementById("divider2").classList.remove("d-none");
-  } else if (number === 2) {
-    document.getElementById("selectPlayerRow").classList.remove("d-none");
-    document.getElementById("player2Card").classList.add("d-block");
-    document.getElementById("player1Card").classList.add("col-md-6");
-    document.getElementById("player2Card").classList.remove("d-none");
-    document.getElementById("divider1").classList.add("d-none");
-    document.getElementById("divider2").classList.add("d-none");
-  }
+  document.getElementById("characterSelectionPage").classList.remove("d-none");
+  document.getElementById("characterSelectionPage").classList.add("d-block");
 }
 // function that chooses character
 function selectCharacter(character) {
@@ -400,73 +376,32 @@ function selectCharacter(character) {
     playerOneIMG.src = "imgs/robot.png";
     character1.src = "imgs/robot.png";
   }
-  isCharacterSelected1 = true;
-  startGameEnable();
-}
-
-function selectCharacter2(character) {
-  let chosenCharacter = document.getElementById("selectedCharacter2");
-  if (character === "globe") {
-    chosenCharacter.textContent = "You chose: Globey";
-    playerTwoIMG.src = "imgs/globe.png";
-    character2.src = "imgs/globe.png";
-  } else if (character === "lego") {
-    chosenCharacter.textContent = "You chose: Blocky";
-    playerTwoIMG.src = "imgs/lego.png";
-    character2.src = "imgs/lego.png";
-  } else if (character === "flask") {
-    chosenCharacter.textContent = "You chose: Fizzy";
-    playerTwoIMG.src = "imgs/flask.png";
-    character2.src = "imgs/flask.png";
-  } else if (character === "robot") {
-    chosenCharacter.textContent = "You chose: Botty";
-    playerTwoIMG.src = "imgs/robot.png";
-    character2.src = "imgs/robot.png";
-  }
-  isCharacterSelected2 = true;
+  characterSelected = true;
   startGameEnable();
 }
 //function to get user's name
 function submitName(player) {
   let name1 = "";
-  let name2 = "";
   if (player === "user1") {
     name1 = document.getElementById("playerOneName").value;
     document.getElementById("userName1").textContent = name1;
     playerName1.textContent = name1;
-    nameSubmitted1 = true;
-  } else if (player === "user2") {
-    name2 = document.getElementById("playerTwoName").value;
-    document.getElementById("userName2").textContent = name2;
-    playerName2.textContent = name2;
-    nameSubmitted2 = true;
+    nameSubmitted = true;
   }
   startGameEnable();
 }
 //function that will enable the start game button
 function startGameEnable() {
-  if (
-    isCharacterSelected1 &&
-      nameSubmitted1 &&
-      isCharacterSelected2 &&
-      nameSubmitted2) {
-    startBtn.disabled = false;
-    character2.classList.remove('d-none')
-    character2.classList.add('d=block')
-    document.getElementById('player2gameCard').classList.remove('d-none')
-  } else if ((isCharacterSelected1 &&
-    nameSubmitted1) && (!isCharacterSelected2 && !nameSubmitted2)) {
-    startBtn.disabled = false;
-    character2.classList.add('d-none')
-    
-    } else {
+  if (nameSubmitted === true && characterSelected === true) {
+    startBtn.disabled = false
+  } else {
     startBtn.disabled = true;
   }
 }
 //page switches from select players page to the game area to begin the game
 function startGame() {
   currentPlayer = player1
-  document.getElementById("selectPlayersPage").classList.add("d-none");
+  document.getElementById("characterSelectionPage").classList.add("d-none");
   document.getElementById("everythingBeforeGameRow").classList.add("d-none");
   document.getElementById("gameArea").classList.remove("d-none");
   document.getElementById("gameArea").classList.add("d-block");
