@@ -380,7 +380,6 @@
               <img src="imgs/globe.png" alt="" id="character1" class="my-1" />
             </div>
           </div>
-          <!-- player 2 -->
           <div class="col-md-2 d-md-block">
           </div>
         </div>
@@ -389,11 +388,13 @@
           <div id="questionPopUp" class="my-5 d-none">
             <h2 id="userQuestion" class="mt-5">Playyer's Question</h2>
             <h1 id="question">Sample Question</h1>
-            <input type="text" id="userResponse" />
+            <input type="text" id="userResponse" spellcheck="true"/>
             <button
               type="submit"
               onclick="submitResponse()"
               class="btn btn-danger"
+              id="submitAnswerBtn"
+              uppercase
             >
               Submit
             </button>

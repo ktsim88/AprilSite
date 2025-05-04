@@ -21,6 +21,8 @@ let diceBtn = document.getElementById("diceBtn");
 let spotCounter = document.getElementById("spaceCounter1");
 let gameUpdater = document.getElementById("gameUpdater");
 let userTurnUpdater = document.getElementById("userTurnUpdater");
+let submitAnswerBtn = document.getElementById('submitAnswerBtn')
+let currentTopic = ''
 let playerSpace = 0
 const lastSpace = 27
 let correctAnswer = ''
@@ -209,56 +211,8 @@ let items = [
   document.getElementById('item4'),
   document.getElementById('item5')
 ]
-function spinWheel() {
-  spinBtn.disabled = true;
 
-  let rotation = value;
-  wheel.style.transition = "transform 4s ease-out";
-  wheel.style.transform = "rotate(" + rotation + "deg)";
-
-  value += Math.ceil(Math.random() * 3600); // increase for next spin
-
-  setTimeout(() => {
-    value += Math.ceil(Math.random() * 3600);
-    const numberOfSegments = items.length;
-    const degreesPerSegment = 360 / numberOfSegments;
-    const currentRotation = value % 360; 
-    const selectedIndex = Math.floor(currentRotation / degreesPerSegment);
-
-    const punishment = items[selectedIndex].innerText.trim();
-    punishmentUpdate = document.getElementById('punishmentUpdate');
-    punishmentUpdate.textContent = `Your punishment is ${punishment}!`;
-
-    // Apply punishment
-    if (punishment === items[0].innerText.trim()) {
-      playerSpace -= 10;
-    } else if (punishment === items[1].innerText.trim()) {
-      playerSpace -= 2;
-    } else if (punishment === items[2].innerText.trim()) {
-      playerSpace -= 0;
-    } else if (punishment === items[3].innerText.trim()) {
-      playerSpace = 0;
-    } else if (punishment === items[4].innerText.trim()) {
-      playerSpace -= 5;
-    }
-
-    if (playerSpace > lastSpace) {
-      playerSpace = lastSpace;
-    }
-    if (playerSpace < 0) {
-      playerSpace = 0;
-    }
-
-    spaceCounter();
-
-    wheel.classList.add('d-none');
-    spinBtn.classList.add('d-none');
-    document.getElementById('punishNextBtn').classList.remove('d-none')
-  }, 4200);
-}
-
-
-// timer tutorial
+// timer tutorial (youtube link in html)
 const btnStart = document.querySelector(".btn-start");
 const progressBar = document.querySelector(".progress-inner");
 
@@ -455,23 +409,27 @@ techCard.addEventListener("click", function() {
 function giveQuestion(topicCard) {
   let question = ''
   if (topicCard === 'popculture') {
+    currentTopic = 'popculture'//set topic as pop culture
     const questionIndex = Math.floor(Math.random() * pcQuestions.length)
     question = pcQuestions[questionIndex]
     correctAnswer = pcAnswers[questionIndex]
   } else if (topicCard === 'geography') {
+    currentTopic = 'geography'
     const questionIndex = Math.floor(Math.random() * geoQuestions.length)
     question = geoQuestions[questionIndex]
     correctAnswer = geoAnswers[questionIndex]
   } else if (topicCard === 'science') {
+    currentTopic = 'science'
     const questionIndex = Math.floor(Math.random() * sciQuestions.length)
     question = sciQuestions[questionIndex]
     correctAnswer = sciAnswers[questionIndex]
   } else if (topicCard === 'technology') {
+    currentTopic = 'technology'
     const questionIndex = Math.floor(Math.random() * techQuestions.length)
     question = techQuestions[questionIndex]
     correctAnswer = techAnswers[questionIndex]
   }
-
+//displaying bits when function is called
   const questionPopUp = document.getElementById('questionPopUp');
   questionPopUp.classList.remove('d-none');
   questionPopUp.classList.add('d-block');
@@ -483,20 +441,38 @@ function giveQuestion(topicCard) {
 
 }
 function submitResponse() {
-  let userResponse = document.getElementById('userResponse').value.trim()
+  let userResponse = document.getElementById('userResponse').value.trim().toLowerCase()
   let nextBtn = document.getElementById('nextBtn')
   let punishmentBtn = document.getElementById('punishmentBtn')
   let result = document.getElementById('result')
   let isCorrect = false
-//loop tht checks for correct
-  for (let i = 0; i === correctAnswer.length; i++){
-    if (userResponse === correctAnswer[i].toLowerCase()) {
-      isCorrect = true
+//array that will get the answers based on the topic thats chosen
+  let answers = []
+  // button disabled immediately
+  submitAnswerBtn.disabled = true
+  if (currentTopic === 'popculture') {
+  answers = pcAnswers
+  } else if (currentTopic === 'geography') {
+    answers = geoAnswers
+} else if (currentTopic === 'science') {
+  answers = sciAnswers
+} else if (currentTopic === 'technology') {
+  answers = techAnswers
+}
+
+  //loop that goes through answers
+  for (let a = 0; a < answers.length; a++){
+    if (userResponse === answers[a].toLowerCase()) {
+      isCorrect = true;
       break
     }
   }
 
-  if (isCorrect === true) {
+  if (userResponse === correctAnswer.toLowerCase()) {
+    isCorrect = true;
+  }
+
+  if (isCorrect) {
     nextBtn.classList.remove('d-none');
     punishmentBtn.classList.add('d-none');
     result.textContent = `Well done! The correct answer is ${correctAnswer}.`
@@ -504,7 +480,7 @@ function submitResponse() {
   // Incorrect answer: Show Punishment Wheel button
   nextBtn.classList.add('d-none');
   punishmentBtn.classList.remove('d-none');
-  result.textContent = `Yikes! The correct Answer is ${correctAnswer}.`
+  result.textContent = `Yikes! The correct answer is ${correctAnswer}.`
 }
 
 }
@@ -531,8 +507,58 @@ function nextTurn() {
   nextBtn.classList.add('d-none')
   punishmentBtn.classList.add('d-none')
   gameUpdater.textContent = 'Roll the dice.'
+  submitAnswerBtn.disabled = false
 }
 
 function spaceCounter() {
   spotCounter.textContent = `${27 - playerSpace} Spaces to the crown!`
+}
+
+//tutorial from youtube (link in html)
+function spinWheel() {
+  spinBtn.disabled = true;
+
+  let rotation = value;
+  wheel.style.transition = "transform 4s ease-out";
+  wheel.style.transform = "rotate(" + rotation + "deg)";
+
+  value += Math.ceil(Math.random() * 3600); // increase for next spin
+
+  setTimeout(() => {
+    value += Math.ceil(Math.random() * 3600);
+    const numberOfSegments = items.length;
+    const degreesPerSegment = 360 / numberOfSegments;
+    const currentRotation = value % 360; 
+    const selectedIndex = Math.floor(currentRotation / degreesPerSegment);
+
+    const punishment = items[selectedIndex].innerText.trim();
+    punishmentUpdate = document.getElementById('punishmentUpdate');
+    punishmentUpdate.textContent = `Your punishment is ${punishment}!`;
+
+    // Apply punishment
+    if (punishment === items[0].innerText.trim()) {
+      playerSpace -= 10;
+    } else if (punishment === items[1].innerText.trim()) {
+      playerSpace -= 2;
+    } else if (punishment === items[2].innerText.trim()) {
+      playerSpace -= 0;
+    } else if (punishment === items[3].innerText.trim()) {
+      playerSpace = 0;
+    } else if (punishment === items[4].innerText.trim()) {
+      playerSpace -= 5;
+    }
+
+    if (playerSpace > lastSpace) {
+      playerSpace = lastSpace;
+    }
+    if (playerSpace < 0) {
+      playerSpace = 0;
+    }
+
+    spaceCounter();
+
+    wheel.classList.add('d-none');
+    spinBtn.classList.add('d-none');
+    document.getElementById('punishNextBtn').classList.remove('d-none')
+  }, 4200);
 }
