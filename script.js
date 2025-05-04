@@ -208,7 +208,6 @@ let techAnswers = [
 let color = ['red', 'yellow', 'green', 'blue']
 let topic = ['Pop Culture', 'Geography', 'Science', 'Technology']
 let space = ''
-
 // spinner tutorial js
 let wheel = document.getElementById("wheel");
 let spinBtn = document.getElementById("spinBtn");
@@ -231,19 +230,17 @@ function spinWheel() {
   value += Math.ceil(Math.random() * 3600); // increase for next spin
 
   setTimeout(() => {
-    const degree = 360 / items.length; // max degree out of the length of the 6 items
-    const finalDeg = ((rotation % 360) + 360) % 360; //
-
-    const selectedIndex = Math.floor(
-      (360 - finalDeg + degree / 2) % 360 / degree
-    );
+const numberOfSegments = items.length;
+const degreesPerSegment = 360 / numberOfSegments;
+const currentRotation = rotation % 360; 
+const selectedIndex = Math.floor(currentRotation / degreesPerSegment); //randome number from the current rotation over the number of degrees per second
 
     const punishment = items[selectedIndex].innerText.trim();
     punishmentUpdate = document.getElementById('punishmentUpdate')
-      punishmentUpdate.textContent = `Yikes! Your punishment is ${punishment}!`
-    
-
-    spinBtn.disabled = false;
+    punishmentUpdate.textContent = `Your punishment is ${punishment}!`
+    // this hides the wheel
+    wheel.classList.add('d-none')
+    spinBtn.classList.add('d-none')
   }, 4200);
 
   if (punishment = items[1]){
@@ -551,7 +548,7 @@ function submitResponse() {
   if (isCorrect === true) {
     nextBtn.classList.remove('d-none');
     punishmentBtn.classList.add('d-none');
-    result.textContent = `Well done! The correct Answer is ${correctAnswer}.`
+    result.textContent = `Well done! The correct answer is ${correctAnswer}.`
 } else {
   // Incorrect answer: Show Punishment Wheel button
   nextBtn.classList.add('d-none');
@@ -565,9 +562,11 @@ function revealPunishment() {
   document.getElementById('questionPopUp').classList.remove('d-block')
   document.getElementById('punishmentWheelPage').classList.remove('d-none')
   document.getElementById('punishmentWheelPage').classList.add('d-block')
+  wheel.classList.remove('d-none')
+  spinBtn.classList.remove('d-none')
 
 }
-
+//function that returns everything back to normal
 function nextTurn() {
   document.getElementById('questionPopUp').classList.remove('d-block')
   document.getElementById('questionPopUp').classList.add('d-none')
@@ -577,6 +576,6 @@ function nextTurn() {
   diceBtn.disabled = false
   document.getElementById('result').textContent = ''
   document.getElementById('punishmentUpdate').textContent = ''
-  
-
+  nextBtn.classList.add('d-none')
+  punishmentBtn.classList.add('d-none')
 }

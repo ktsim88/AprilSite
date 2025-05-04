@@ -6,6 +6,7 @@
   height: 800px;
   transition-duration: 2s;
   position: relative;
+  margin-top: 50px;
 }
 #questionPopUp, #punishmentWheelPage {
   position: relative;
@@ -36,13 +37,11 @@
 }
 .cardBtn {
   background-color: red;
+  color: red;
   width: 12%;
   height: 10%;
   top: 80%;
   position: absolute;
-}
-.cardBtn:hover {
-  outline: 3px dashed blueviolet;
 }
 
 #character1 {
