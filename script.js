@@ -215,40 +215,45 @@ function spinWheel() {
   let rotation = value;
   wheel.style.transition = "transform 4s ease-out";
   wheel.style.transform = "rotate(" + rotation + "deg)";
-  
+
   value += Math.ceil(Math.random() * 3600); // increase for next spin
 
   setTimeout(() => {
-    value += Math.ceil(Math.random() * 3600); // increase for next spin
+    value += Math.ceil(Math.random() * 3600);
     const numberOfSegments = items.length;
     const degreesPerSegment = 360 / numberOfSegments;
     const currentRotation = value % 360; 
     const selectedIndex = Math.floor(currentRotation / degreesPerSegment);
-    
 
     const punishment = items[selectedIndex].innerText.trim();
-    punishmentUpdate = document.getElementById('punishmentUpdate')
-    punishmentUpdate.textContent = `Your punishment is ${punishment}!`
-    //punishements
-    if (punishment === items[0]){
-      playerSpace += 10
-      spaceCounter()
-    } else if (punishment === items[1]) {
-      playerSpace += 2
-      spaceCounter()
-    } else if (punishment === items[2]) {
-      playerSpace += 0
-      spaceCounter()
-    } else if (punishment === items[3]) {
-      playerSpace === lastSpace
-      spaceCounter()
-    } else if (punishment === items[4]) {
-      playerSpace += 5
-      spaceCounter()
+    punishmentUpdate = document.getElementById('punishmentUpdate');
+    punishmentUpdate.textContent = `Your punishment is ${punishment}!`;
+
+    // Apply punishment
+    if (punishment === items[0].innerText.trim()) {
+      playerSpace -= 10;
+    } else if (punishment === items[1].innerText.trim()) {
+      playerSpace -= 2;
+    } else if (punishment === items[2].innerText.trim()) {
+      playerSpace -= 0;
+    } else if (punishment === items[3].innerText.trim()) {
+      playerSpace = 0;
+    } else if (punishment === items[4].innerText.trim()) {
+      playerSpace -= 5;
     }
-    // this hides the wheel
-    wheel.classList.add('d-none')
-    spinBtn.classList.add('d-none')
+
+    if (playerSpace > lastSpace) {
+      playerSpace = lastSpace;
+    }
+    if (playerSpace < 0) {
+      playerSpace = 0;
+    }
+
+    spaceCounter();
+
+    wheel.classList.add('d-none');
+    spinBtn.classList.add('d-none');
+    document.getElementById('punishNextBtn').classList.remove('d-none')
   }, 4200);
 }
 
@@ -508,6 +513,7 @@ function revealPunishment() {
   document.getElementById('questionPopUp').classList.remove('d-block')
   document.getElementById('punishmentWheelPage').classList.remove('d-none')
   document.getElementById('punishmentWheelPage').classList.add('d-block')
+  document.getElementById('punishNextBtn').classList.add('d-none')
   wheel.classList.remove('d-none')
   spinBtn.classList.remove('d-none')
 
