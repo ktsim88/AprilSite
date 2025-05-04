@@ -213,13 +213,14 @@ let items = [
 ]
 
 // timer tutorial (youtube link in html)
-const btnStart = document.querySelector(".btn-start");
 const progressBar = document.querySelector(".progress-inner");
-
+let countDown
 function startTimer() {
+  clearInterval(countDown)
   let interval = 30;
-
-  let countDown = setInterval(() => {
+  progressBar.style.width = "100%"
+  progressBar.style.background = 'green'
+  countDown = setInterval(() => {
     interval--;
 
     let progressWidth = (interval / 30) * 100;
@@ -230,6 +231,9 @@ function startTimer() {
     } else {
       clearInterval(countDown);
       progressBar.style.width = "0%";
+      result.textContent = `Time is UP! The correct answer is ${correctAnswer}.`
+      document.getElementById('punishmentBtn').classList.remove('d-none')
+      submitAnswerBtn.disabled = true
     }
   }, 1000);
 };
@@ -271,35 +275,34 @@ function rollDice() {
   }
 
   if (currentPlayer === player1) {
-    playerSpace1 = playerSpace;
-    space = playerSpace1;
-  } else {
-    playerSpace1 = playerSpace;
-    space = playerSpace2;
+    playerSpace = playerSpace;
+    space = playerSpace;
   }
 
   if ([1,5,9,13,17,21,25].includes(space)) {
     color = 'red'
     topic = 'Pop Culture'
     popCultureCard.disabled = false
+    gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
   } else if ([2,6,10,14,18,22,26].includes(space)) {
     color = 'yellow'
     topic = 'Geography'
     geographyCard.disabled = false
+    gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
   } else if ([3,7,11,15,19,23].includes(space)) {
     color = 'green'
     topic = 'Science'
     scienceCard.disabled = false
+    gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
   } else if ([4,8,12,16,20,24].includes(space)) {
     color = 'blue'
     topic = 'Technology'
     techCard.disabled = false
+    gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
+  } else if (playerSpace = 27) {
+    gameUpdater.textContent = `Congrats ${playerName1.textContent} for making it to the crown!`
+  document.getElementById('endingBtn').classList.remove('d-none')
   }
-  gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
-
-  // else if (space === 27) {
-  //   endGame()
-  //   }
   spaceCounter()
 }
 //functions before the game
@@ -468,9 +471,6 @@ function submitResponse() {
     }
   }
 
-  if (userResponse === correctAnswer.toLowerCase()) {
-    isCorrect = true;
-  }
 
   if (isCorrect) {
     nextBtn.classList.remove('d-none');
@@ -508,6 +508,10 @@ function nextTurn() {
   punishmentBtn.classList.add('d-none')
   gameUpdater.textContent = 'Roll the dice.'
   submitAnswerBtn.disabled = false
+  popCultureCard.disabled = true
+  geographyCard.disabled = true
+  scienceCard.disabled = true
+  techCard.disabled = true
 }
 
 function spaceCounter() {
@@ -561,4 +565,8 @@ function spinWheel() {
     spinBtn.classList.add('d-none');
     document.getElementById('punishNextBtn').classList.remove('d-none')
   }, 4200);
+}
+
+function returnHome() {
+  location.reload()
 }
