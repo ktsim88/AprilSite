@@ -15,14 +15,12 @@ startBtn.disabled = true;
 let characterSelected = false;
 let nameSubmitted = false;
   //dice variables
-let diceNumber = Math.floor(Math.random() * 6) + 1;
 let diceImg = document.getElementById("diceImg");
 let diceBtn = document.getElementById("diceBtn");
 //variables for actual game
 let spotCounter = document.getElementById("spaceCounter1");
 let gameUpdater = document.getElementById("gameUpdater");
 let userTurnUpdater = document.getElementById("userTurnUpdater");
-let currentPlayerSpace = 0
 let playerSpace = 0
 const lastSpace = 27
 let correctAnswer = ''
@@ -209,8 +207,7 @@ let items = [
   document.getElementById('item2'),
   document.getElementById('item3'),
   document.getElementById('item4'),
-  document.getElementById('item5'),
-  document.getElementById('item6')
+  document.getElementById('item5')
 ]
 function spinWheel() {
   spinBtn.disabled = true;
@@ -222,23 +219,37 @@ function spinWheel() {
   value += Math.ceil(Math.random() * 3600); // increase for next spin
 
   setTimeout(() => {
-const numberOfSegments = items.length;
-const degreesPerSegment = 360 / numberOfSegments;
-const currentRotation = rotation % 360; 
-const selectedIndex = Math.floor(currentRotation / degreesPerSegment); //randome number from the current rotation over the number of degrees per second
+    value += Math.ceil(Math.random() * 3600); // increase for next spin
+    const numberOfSegments = items.length;
+    const degreesPerSegment = 360 / numberOfSegments;
+    const currentRotation = value % 360; 
+    const selectedIndex = Math.floor(currentRotation / degreesPerSegment);
+    
 
     const punishment = items[selectedIndex].innerText.trim();
     punishmentUpdate = document.getElementById('punishmentUpdate')
     punishmentUpdate.textContent = `Your punishment is ${punishment}!`
+    //punishements
+    if (punishment === items[0]){
+      playerSpace += 10
+      spaceCounter()
+    } else if (punishment === items[1]) {
+      playerSpace += 2
+      spaceCounter()
+    } else if (punishment === items[2]) {
+      playerSpace += 0
+      spaceCounter()
+    } else if (punishment === items[3]) {
+      playerSpace === lastSpace
+      spaceCounter()
+    } else if (punishment === items[4]) {
+      playerSpace += 5
+      spaceCounter()
+    }
     // this hides the wheel
     wheel.classList.add('d-none')
     spinBtn.classList.add('d-none')
   }, 4200);
-
-  if (punishment = items[1]){
-    currentPlayerSpace-5
-    updateGame()
-  }
 }
 
 
@@ -275,35 +286,36 @@ const checkColors = (width) => {
 };
 // function that randomizes dice rolls
 function rollDice() {
+  let diceNumber = Math.floor(Math.random() * 6) + 1;
 
   //disables button immediately
   diceBtn.disabled = true;
 
   if (diceNumber === 1) {
     diceImg.src = "imgs/dice1.png";
-    currentPlayerSpace +=1
+    playerSpace +=1
   } else if (diceNumber === 2) {
     diceImg.src = "imgs/dice2.png";
-    currentPlayerSpace += 2;
+    playerSpace += 2;
   } else if (diceNumber === 3) {
     diceImg.src = "imgs/dice3.png";
-    currentPlayerSpace +=3
+    playerSpace +=3
   } else if (diceNumber === 4) {
     diceImg.src = "imgs/dice4.png";
-    currentPlayerSpace +=4
+    playerSpace +=4
   } else if (diceNumber === 5) {
     diceImg.src = "imgs/dice5.png";
-    currentPlayerSpace +=5
+    playerSpace +=5
   } else if (diceNumber === 6) {
     diceImg.src = "imgs/dice6.png";
-    currentPlayerSpace +=6
+    playerSpace +=6
   }
 
   if (currentPlayer === player1) {
-    playerSpace1 = currentPlayerSpace;
+    playerSpace1 = playerSpace;
     space = playerSpace1;
   } else {
-    playerSpace1 = currentPlayerSpace;
+    playerSpace1 = playerSpace;
     space = playerSpace2;
   }
 
@@ -324,10 +336,12 @@ function rollDice() {
     topic = 'Technology'
     techCard.disabled = false
   }
+  gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
+
   // else if (space === 27) {
   //   endGame()
   //   }
-  updateGame()
+  spaceCounter()
 }
 //functions before the game
 //landing page to questionpage
@@ -415,9 +429,6 @@ function startGame() {
 
 }
 
-function updateGame() {
-  gameUpdater.textContent = `You rolled ${diceNumber}. You landed on a ${color} space. Click the ${topic} card for your question.`
-}
 //adding event listeners so  when card is called, this topic will show up
 popCultureCard.addEventListener("click", function() {
   giveQuestion('popculture');
@@ -513,4 +524,9 @@ function nextTurn() {
   document.getElementById('punishmentUpdate').textContent = ''
   nextBtn.classList.add('d-none')
   punishmentBtn.classList.add('d-none')
+  gameUpdater.textContent = 'Roll the dice.'
+}
+
+function spaceCounter() {
+  spotCounter.textContent = `${27 - playerSpace} Spaces to the crown!`
 }
