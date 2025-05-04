@@ -366,6 +366,17 @@ function submitName(player) {
   }
   startGameEnable();
 }
+//enter key for submiting name
+document.getElementById('playerOneName').addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    name1 = document.getElementById("playerOneName").value;
+    document.getElementById("userName1").textContent = name1;
+    playerName1.textContent = name1;
+    nameSubmitted = true;;
+  }
+  startGameEnable()
+})
+
 //function that will enable the start game button
 function startGameEnable() {
   if (nameSubmitted === true && characterSelected === true) {
@@ -443,6 +454,50 @@ function giveQuestion(topicCard) {
   startTimer()
 
 }
+//enter key for submit response
+document.getElementById('userResponse').addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    // Get and normalize the user's response
+    const userResponse = document.getElementById('userResponse').value.trim().toLowerCase();
+
+    // Disable the button immediately
+    submitAnswerBtn.disabled = true;
+
+    // Choose the answer array based on the current topic
+    let answers = [];
+    if (currentTopic === 'popculture') {
+      answers = pcAnswers;
+    } else if (currentTopic === 'geography') {
+      answers = geoAnswers;
+    } else if (currentTopic === 'science') {
+      answers = sciAnswers;
+    } else if (currentTopic === 'technology') {
+      answers = techAnswers;
+    }
+
+    // Check if user response matches the correct answer(s)
+    let isCorrect = false;
+    for (let a = 0; a < answers.length; a++) {
+      if (userResponse === answers[a].toLowerCase()) {
+        isCorrect = true;
+        break;
+      }
+    }
+
+    // Show result
+    if (isCorrect) {
+      nextBtn.classList.remove('d-none');
+      punishmentBtn.classList.add('d-none');
+      result.textContent = `Well done! The correct answer is ${correctAnswer}.`;
+    } else {
+      nextBtn.classList.add('d-none');
+      punishmentBtn.classList.remove('d-none');
+      result.textContent = `Yikes! The correct answer is ${correctAnswer}.`;
+    }
+  }
+});
+
+
 function submitResponse() {
   let userResponse = document.getElementById('userResponse').value.trim().toLowerCase()
   let nextBtn = document.getElementById('nextBtn')
@@ -511,7 +566,8 @@ function nextTurn() {
   popCultureCard.disabled = true
   geographyCard.disabled = true
   scienceCard.disabled = true
-  techCard.disabled = true
+  techCard.disabled = true 
+  document.getElementById('userResponse').value = ''
 }
 
 function spaceCounter() {
