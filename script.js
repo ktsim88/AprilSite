@@ -20,7 +20,6 @@ let diceBtn = document.getElementById("diceBtn");
 //variables for actual game
 let spotCounter = document.getElementById("spaceCounter1");
 let gameUpdater = document.getElementById("gameUpdater");
-let userTurnUpdater = document.getElementById("userTurnUpdater");
 let submitAnswerBtn = document.getElementById('submitAnswerBtn')
 let currentTopic = ''
 let playerSpace = 0
@@ -397,7 +396,6 @@ function startGame() {
   scienceCard.disabled = true
   techCard.disabled = true
   
-  userTurnUpdater.textContent = `${playerName1.textContent}'s Turn`
   gameUpdater.textContent = `Roll the Dice`
 
 }
@@ -448,7 +446,6 @@ function giveQuestion(topicCard) {
   questionPopUp.classList.remove('d-none');
   questionPopUp.classList.add('d-block');
   document.getElementById('gameRow').classList.add('d-none')
-  document.getElementById('userQuestion').textContent = `${currentPlayer}'s Question`;
   document.getElementById('question').textContent = question;
 
   startTimer()
@@ -497,7 +494,7 @@ document.getElementById('userResponse').addEventListener('keypress', (event) => 
   }
 });
 
-
+// function that submits responses
 function submitResponse() {
   let userResponse = document.getElementById('userResponse').value.trim().toLowerCase()
   let nextBtn = document.getElementById('nextBtn')
@@ -539,6 +536,7 @@ function submitResponse() {
 }
 
 }
+// function that reveals the punishment wheel
 function revealPunishment() {
   document.getElementById('questionPopUp').classList.add('d-none')
   document.getElementById('questionPopUp').classList.remove('d-block')
@@ -581,11 +579,11 @@ function spinWheel() {
   let rotation = value;
   wheel.style.transition = "transform 4s ease-out";
   wheel.style.transform = "rotate(" + rotation + "deg)";
+  const spinAmount = Math.ceil(Math.random() * 3600); 
+  value += spinAmount;
 
-  value += Math.ceil(Math.random() * 3600); // increase for next spin
 
   setTimeout(() => {
-    value += Math.ceil(Math.random() * 3600);
     const numberOfSegments = items.length;
     const degreesPerSegment = 360 / numberOfSegments;
     const currentRotation = value % 360; 
@@ -616,9 +614,6 @@ function spinWheel() {
     }
 
     spaceCounter();
-
-    wheel.classList.add('d-none');
-    spinBtn.classList.add('d-none');
     document.getElementById('punishNextBtn').classList.remove('d-none')
   }, 4200);
 }

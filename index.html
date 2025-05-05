@@ -36,7 +36,7 @@
           <button
             type="button"
             onclick="playGame()"
-            class="btn btn-primary"
+            class="btn"
             id="playBtn"
           >
             Play
@@ -44,10 +44,10 @@
         </div>
         <!-- a page will pop up asking user if its their first time playing -->
         <div id="questionPage" class="m-5 py-5 px-3 d-none">
-          <h1 class="my-3">Is this your first time playing</h1>
+          <h1 class="my-3">Is this your first time playing?</h1>
           <button
             type="button"
-            class="btn btn-success px-5 my-2"
+            class="btn yesBtn px-5 my-2"
             onclick="firstGame('yes')"
           >
             Yes
@@ -55,7 +55,7 @@
           <!--if user clicks yes, instruction screen will pop up-->
           <button
             type="button"
-            class="btn btn-danger px-5 my-2"
+            class="btn noBtn px-5 my-2"
             onclick="firstGame('no')"
           >
             No
@@ -110,7 +110,7 @@
               </p>
             </div>
           </div>
-          <button class="btn btn-danger my-3 px-5" onclick="understandGame()">
+          <button class="btn yesBtn my-3 px-5" onclick="understandGame()">
             Okay
           </button>
         </div>
@@ -120,6 +120,7 @@
             class="row justify-content-center align-items-center"
           >
             <div class="my-3">
+              <h4>Choose your character and your name. Your options for the characters are seen in the carousel.</h4>
               <div id="selectYourCharacter" class="row my-3">
                 <div id="divider1" class="col-md-3"></div>
                 <div class="col-md-6 my-3" id="player1Card">
@@ -168,7 +169,7 @@
                             <h5 class="charcterName">Globey</h5>
                             <p class="characterInfo">
                               <button
-                                class="btn btn-danger"
+                                class="btn  "
                                 onclick="selectCharacter('globe')"
                               >
                                 Select Globey
@@ -186,7 +187,7 @@
                             <h5 class="charcterName">Blocky</h5>
                             <p>
                               <button
-                                class="btn btn-danger"
+                                class="btn  "
                                 onclick="selectCharacter('lego')"
                               >
                                 Select Blocky
@@ -204,7 +205,7 @@
                             <h5 class="charcterName">Botty</h5>
                             <p>
                               <button
-                                class="btn btn-danger"
+                                class="btn  "
                                 onclick="selectCharacter('robot')"
                               >
                                 Select Botty
@@ -222,7 +223,7 @@
                             <h5 class="charcterName">Fizzy</h5>
                             <p>
                               <button
-                                class="btn btn-danger"
+                                class="btn"
                                 onclick="selectCharacter('flask')"
                               >
                                 Select Fizzy
@@ -264,7 +265,7 @@
                       <button
                         type="submit"
                         onclick="submitName('user1')"
-                        class="btn btn-danger my-3"
+                        class="btn submitBtn my-3"
                         required
                       >
                         Submit Name
@@ -277,7 +278,7 @@
               </div>
               <button
                 type="submit"
-                class="btn btn-danger"
+                class="btn  "
                 onclick="startGame()"
                 id="startBtn"
               >
@@ -292,8 +293,9 @@
 <!-- game row -->
         <div class="row" id="gameRow">
           <!-- player 1 -->
-          <div class="col-md-2"><div class="row">
-            <div class="col-sm-6 col-md-12">
+          <div class="col-md-2">
+            <div class="row">
+            <div class="col-6 col-md-12">
               <div id="player1">
                 <img
                   src="https://picsum.photos/id/237/200/200"
@@ -302,11 +304,11 @@
                   id="player1Img"
                   
                 />
-                <div class="card-body" id="playerName1">Player 1's Name</div>
+                <div class="card-body" id="playerName1">You</div>
                 <p id="spaceCounter1">27 Spaces to the Crown</p>
               </div>
             </div>
-            <div class="col-sm-6 col-md-12">
+            <div class="col-6 col-md-12">
               <div class="diceSection">
                 <img
                   src="imgs/dice1.png"
@@ -315,7 +317,7 @@
                   class="img-fluid my-2"
                 />
                 <button
-                  class="btn btn-primary mt-2"
+                  class="btn  my-2"
                   id="diceBtn"
                   onclick="rollDice()"
                 >
@@ -331,10 +333,10 @@
           <!-- game board -->
           <div class="col-md-8">
             <div class="row">
-              <div class="alert alert-primary" role="alert">
-                <h2 id="userTurnUpdater">Player 1's Turn</h2>
+              <div class="alert" role="alert">
+                <h2>Race to the Crown</h2>
                 <p id="gameUpdater"></p>
-                <button class="btn btn-primary d-none" id="endingBtn" onclick="returnHome()">Click Here to the Home Page</button>
+                <button class="btn   d-none" id="endingBtn" onclick="returnHome()">Click Here to the Home Page</button>
               </div>
             </div>
             <div class="boardContainer position-relative">
@@ -344,38 +346,38 @@
                 id="gameBoard"
                 class="img-fluid"
               />
-              <div class="row mx-5">
+              <div class="row align-items-center justify-content-center">
                 <button
-                  class="btn cardBtn w-auto mx-2 btn-lg col-3"
+                  class="btn w-auto mx-2 btn-lg col-3"
                   id="popCultureCard"
                   onclick="giveQuestion(popculture)"
                   disabled
                 >
-                  T
+                  POP
                 </button>
                 <button
-                  class="btn cardBtn w-auto mx-2 btn-lg col-3"
+                  class="btn w-auto mx-2 btn-lg col-3"
                   id="geographyCard"
                   onclick="giveQuestion(geography)"
                   disabled
                 >
-                  T
+                  GEO
                 </button>
                 <button
-                  class="btn cardBtn w-auto mx-2 btn-lg col-3"
+                  class="btn w-auto mx-2 btn-lg col-3"
                   id="scienceCard"
                   onclick="giveQuestion(science)"
                   disabled
                 >
-                  T
+                  SCI
                 </button>
                 <button
-                  class="btn cardBtn w-auto mx-2 btn-lg col-3"
+                  class="btn w-auto mx-2 btn-lg col-3"
                   id="techCard"
                   onclick="giveQuestion(technology)"
                   disabled
                 >
-                  T
+                  TEC
                 </button>
               </div>
               <img src="imgs/globe.png" alt="" id="character1" class="my-1" />
@@ -387,13 +389,13 @@
         <!-- row question pop up and punishment -->
         <div class="row" id="questionRow">
           <div id="questionPopUp" class="my-5 d-none">
-            <h2 id="userQuestion" class="mt-5">Playyer's Question</h2>
+            <h2 id="userQuestion" class="mt-5">Your Question</h2>
             <h1 id="question">Sample Question</h1>
             <input type="text" id="userResponse" spellcheck="true"/>
             <button
               type="submit"
               onclick="submitResponse()"
-              class="btn btn-danger"
+              class="btn  "
               id="submitAnswerBtn"
               uppercase
             >
@@ -409,7 +411,7 @@
             <!-- end of youtube tutorial -->
             <button
               onclick="nextTurn()"
-              class="btn btn-primary d-none"
+              class="btn   d-none"
               id="nextBtn"
             >
               Next Turn
@@ -417,36 +419,36 @@
             <button
               id="punishmentBtn"
               onclick="revealPunishment()"
-              class="btn btn-danger d-none"
+              class="btn   d-none"
             >
               Punishment Wheel</button
             ><!--will be d-none unless user gets answer wrong-->
           </div>
-          <div id="punishmentWheelPage" class="align-items-center justify-content-center d-none">
-            <h2 id="userNamePunishment">Player Name's Punishment</h2>
+          <div id="punishmentWheelPage" class="d-flex flex-column align-items-center justify-content-center d-none">
+            <h2 id="userNamePunishment" class="mb-5">Your Punishment</h2>
             <!-- spinner tutorial: https://www.youtube.com/watch?v=F3-lK_-PQr0&t=81s -->
-            <div class="spinnerContainer mx-5 ms-2">
+            <div class="spinnerContainer">
               <div id="spinBtn" onclick="spinWheel()">Spin</div>
               <div id="wheel">
-                <div class="number" style="--i: 1; --clr: #de190b" id="item1">
+                <div class="number" style="--i: 1; --clr: #4f92ff" id="item1">
                   <span>Go back 10 spaces</span>
                 </div>
-                <div class="number" style="--i: 2; --clr: #de5f0b" id="item2">
+                <div class="number" style="--i: 2; --clr: #1957bd" id="item2">
                   <span>Go Back 2 Spaces</span>
                 </div>
-                <div class="number" style="--i: 3; --clr: #de9f0b" id="item3">
+                <div class="number" style="--i: 3; --clr: #1d3285" id="item3">
                   <span>No punishment</span>
                 </div>
-                <div class="number" style="--i: 4; --clr: #a9de0b" id="item4">
+                <div class="number" style="--i: 4; --clr: #1062cc" id="item4">
                   <span>Go back to the start</span>
                 </div>
-                <div class="number" style="--i: 5; --clr: #16de0b" id="item5">
+                <div class="number" style="--i: 5; --clr: #104ec9" id="item5">
                   <span>Go back 5 spaces</span>
                 </div>
                 </div>
               </div>
-              <h5 id="punishmentUpdate"></h5>
-            <button onclick="nextTurn()" class="btn btn-primary nextTurn" id="punishNextBtn">
+              <h5 id="punishmentUpdate" class="mt-5"></h5>
+            <button onclick="nextTurn()" class="btn   nextTurn" id="punishNextBtn">
               Next Turn
             </button>
             </div>
