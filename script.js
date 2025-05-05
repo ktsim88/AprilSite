@@ -574,25 +574,27 @@ function spaceCounter() {
 
 //tutorial from youtube (link in html)
 function spinWheel() {
+  //disabled btn
   spinBtn.disabled = true;
-
-  let rotation = value;
-  wheel.style.transition = "transform 4s ease-out";
-  wheel.style.transform = "rotate(" + rotation + "deg)";
-  const spinAmount = Math.ceil(Math.random() * 3600); 
-  value += spinAmount;
-
-
-  setTimeout(() => {
-    const numberOfSegments = items.length;
-    const degreesPerSegment = 360 / numberOfSegments;
-    const currentRotation = value % 360; 
-    const selectedIndex = Math.floor(currentRotation / degreesPerSegment);
-
-    const punishment = items[selectedIndex].innerText.trim();
-    punishmentUpdate = document.getElementById('punishmentUpdate');
-    punishmentUpdate.textContent = `Your punishment is ${punishment}!`;
-
+  wheel.style.transform = "rotate(" + value + "deg)";
+   value = Math.ceil(Math.random() * 3600);
+ 
+   let rotation = value;
+   wheel.style.transition = "transform 4s ease-out";
+   wheel.style.transform = "rotate(" + rotation + "deg)";
+   
+ 
+   setTimeout(() => {
+     const degPerSegment = 360 / items.length;
+     const finalDeg = ((rotation % 360) + 360) % 360;
+ 
+     const selectedIndex = Math.floor(
+       (360 - finalDeg + degPerSegment / 2) % 360 / degPerSegment
+     );
+ 
+     const punishment = items[selectedIndex].innerText.trim();
+     punishmentUpdate = document.getElementById('punishmentUpdate')
+       punishmentUpdate.textContent = `Yikes! Your punishment is ${punishment}!`
     // Apply punishment
     if (punishment === items[0].innerText.trim()) {
       playerSpace -= 10;
